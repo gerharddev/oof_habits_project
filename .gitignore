@@ -129,4 +129,5 @@ dmypy.json
 .pyre/
 
 # Draw io backup files
-.bkp
+*.bkp
+*.tmp
