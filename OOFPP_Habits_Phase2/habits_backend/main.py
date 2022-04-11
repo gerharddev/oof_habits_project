@@ -6,7 +6,8 @@
 # Seed the database with some habits
 # CLI interface
 # Swagger Interface
-
+# venv\scripts\activate
+# deactivate
 
 # from venv import create #Virtual Environment - virtualenv
 import click
@@ -15,11 +16,16 @@ import click
 def cli():
     pass
 
+def hello():
+    click.echo('Hello World!')
+
+my_test = "HELLO"
+
 @click.command()
-@click.option('--habit_cli', default="", help='Command line interface for the habit tracking application.')
-def habit_cli(habit_cli):
+@click.option('--add', default="", help='Add a new habit.')
+def habit_cli(add):
     """CLI interface for habit tracking application."""
-    click.echo("CLI")
+    click.echo("New Habit: %s" % add)
 
 @click.command()
 @click.option('--habit_api', default="", help='REST Api for the habit tracking application.')
@@ -36,3 +42,4 @@ if __name__ == '__main__':
 
 # HOW TO USE:
 # python Click_POC.py habit --habit_create "Go Running"
+# python main.py habit-cli --add test 

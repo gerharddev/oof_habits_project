@@ -9,4 +9,9 @@
 
 ## Testing
 
-We are using pytest as our testing framework. To run the test open your terminal in the habits*backend folder and run \_pytest*
+We are using pytest as our testing framework.
+To run the test open your terminal in the habits_backend folder and run
+
+```
+pytest test_sample.py
+```
