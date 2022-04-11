@@ -15,3 +15,9 @@ To run the test open your terminal in the habits_backend folder and run
 ```
 pytest test_sample.py
 ```
+
+## Running the cli
+
+python main.py start-rest-api
+python main.py habit-cli --add Test
+python main.py habit-cli --command Test

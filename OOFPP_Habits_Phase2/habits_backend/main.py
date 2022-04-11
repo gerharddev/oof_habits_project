@@ -1,5 +1,7 @@
 """Habit Tracking Entry Point."""
 
+# venv\scripts\activate - When working on the project 
+
 # TODO:
 # Setup pylint
 # Setup pytest
@@ -14,7 +16,7 @@ import click
 
 @click.group()
 def cli():
-    pass
+    pass    # placeholder
 
 def hello():
     click.echo('Hello World!')
@@ -22,24 +24,29 @@ def hello():
 my_test = "HELLO"
 
 @click.command()
-@click.option('--add', default="", help='Add a new habit.')
-def habit_cli(add):
+@click.option('--command', default="", help='Command line interface for the habit tracking application.')
+@click.option('--add', default="", help='Add a habit.')
+def habit_cli(command,add):
     """CLI interface for habit tracking application."""
-    click.echo("New Habit: %s" % add)
+    if command:
+        # TODO: Take in command line arguments for all the values
+        click.echo("Command entered %s: "%(command))
+    if add:
+        click.echo("Adding a new  %s habit."%(add))
 
 @click.command()
-@click.option('--habit_api', default="", help='REST Api for the habit tracking application.')
-def rest_api(habit_api):
-    """REST API for habit tracking application."""
-    click.echo("API!")
+def start_rest_api():
+    """Start the REST API for the habit tracking application."""
+
+    click.echo("START REST API")
 
 cli.add_command(habit_cli)
-cli.add_command(rest_api)
+cli.add_command(start_rest_api)
 
 if __name__ == '__main__':
-    print('STARTING')
     cli()
 
 # HOW TO USE:
 # python Click_POC.py habit --habit_create "Go Running"
 # python main.py habit-cli --add test 
+# python main.py rest_api --habit_api "Test"
