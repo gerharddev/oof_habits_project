@@ -1,19 +1,7 @@
 """Habit Tracking Entry Point."""
 
-# venv\scripts\activate - When working on the project 
-# deactivate - When done working on the project
-
-# TODO:
-# Setup pylint
-# Setup pytest
-# Seed the database with some habits
-# CLI interface
-# Swagger Interface
-# venv\scripts\activate
-# deactivate
-
-# from venv import create #Virtual Environment - virtualenv
 import click
+from habits_backend.restapi.fastapi_app import *
 
 @click.group()
 def cli():
@@ -31,10 +19,10 @@ def habit_cli(command,add):
         click.echo("%s has been added."%(add))
 
 @click.command()
-@click.option('--startapi',default="",help='Start the REST API with a OpenAPI documentation')
+# @click.option('--startapi',default="",help='Start the REST API with a OpenAPI documentation')
 def start_rest_api():
     """Start the REST API for the habit tracking application."""
-    raise('Not implemented yet.')
+    start_api_server()
 
 cli.add_command(habit_cli)
 cli.add_command(start_rest_api)
@@ -46,3 +34,6 @@ if __name__ == '__main__':
 # python Click_POC.py habit --habit_create "Go Running"
 # python main.py habit-cli --add test 
 # python main.py rest_api --habit_api "Test"
+
+# venv\scripts\activate - When working on the project
+# deactivate - When done working on the project

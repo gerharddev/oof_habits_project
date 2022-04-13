@@ -21,3 +21,10 @@ pytest test_sample.py
 python main.py start-rest-api
 python main.py habit-cli --add Test
 python main.py habit-cli --command Test
+
+### Start Rest API
+
+```python main.py start-rest-api```
+
+To see the OpenAPI documentation browse to
+http://127.0.0.1:8000/docs
