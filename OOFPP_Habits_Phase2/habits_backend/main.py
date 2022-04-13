@@ -1,6 +1,7 @@
 """Habit Tracking Entry Point."""
 
 # venv\scripts\activate - When working on the project 
+# deactivate - When done working on the project
 
 # TODO:
 # Setup pylint
@@ -18,11 +19,6 @@ import click
 def cli():
     pass    # placeholder
 
-def hello():
-    click.echo('Hello World!')
-
-my_test = "HELLO"
-
 @click.command()
 @click.option('--command', default="", help='Command line interface for the habit tracking application.')
 @click.option('--add', default="", help='Add a habit.')
@@ -32,13 +28,13 @@ def habit_cli(command,add):
         # TODO: Take in command line arguments for all the values
         click.echo("Command entered %s: "%(command))
     if add:
-        click.echo("Adding a new  %s habit."%(add))
+        click.echo("%s has been added."%(add))
 
 @click.command()
+@click.option('--startapi',default="",help='Start the REST API with a OpenAPI documentation')
 def start_rest_api():
     """Start the REST API for the habit tracking application."""
-
-    click.echo("START REST API")
+    raise('Not implemented yet.')
 
 cli.add_command(habit_cli)
 cli.add_command(start_rest_api)
