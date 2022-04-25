@@ -12,10 +12,10 @@ class Habit(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
     description = Column(String)
-    creation_date = Column(DateTime,nullable=False,default=datetime.utcnow,comment="Creation date in UTC")
-    frequency_id=Column(Integer,ForeignKey("frequencies.id"))
+    creation_date = Column(DateTime, nullable=False, default=datetime.utcnow, comment="Creation date in UTC")
+    frequency_id = Column(Integer, ForeignKey("frequencies.id"))
 
-    frequency = relationship("Frequency", back_populates="habits")
+    frequency = relationship("Frequency")
 
 
 class Frequency(Base):
@@ -23,4 +23,4 @@ class Frequency(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
-    frequency = Column(String)  # %d or %m or %y
+    repeat = Column(String)  # day, week, month or year
