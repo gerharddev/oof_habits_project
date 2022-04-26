@@ -9,12 +9,18 @@
 # """
 
 import uvicorn
+from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
+
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
 
 from . import crud, models, schemas
 from .database import SessionLocal, engine
 
+from . import models
+from .database import SessionLocal, engine
+from habits_backend.restapi import habits, frequencies
 
 def start_api_server():
     """Start the REST API"""
@@ -29,9 +35,10 @@ def start_api_server():
         finally:
             db.close()
 
-    @app.get("/")
-    async def root():
-        return {"message": "Hello World"}
+    @app.get("/", tags=["root"])
+    def root():
+        """Application root. Redirects to the docs page."""
+        return RedirectResponse("/docs")
 
     @app.get("/frequencies/", response_model=list[schemas.Frequency])
     async def read_frequencies(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
@@ -44,6 +51,9 @@ def start_api_server():
         if db_frequency:
             raise HTTPException(status_code=400, detail="Frequency already exist")
         return crud.create_frequency(db=db, frequency=frequency)
+
+    app.include_router(habits.router)
+    # app.include_router(frequencies.router)
 
     uvicorn.run(app, host="0.0.0.0", port=8000)
 

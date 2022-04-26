@@ -2,10 +2,21 @@
 
 from fastapi import APIRouter, HTTPException
 from habits_backend.crud.frequencies import *
-from habits_backend.database.connectors import *
+# from habits_backend.database.connectors import *
 from habits_backend.schemas.frequencies import *
+from habits_backend.database.connectors import SessionLocal, engine
 
 router = APIRouter()
+# Base.metadata.create_all(bind=engine)
+
+
+# Dependency
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 
 @router.get("/frequencies/", response_model=list[Frequency], tags=["frequencies"])
