@@ -20,6 +20,7 @@ class Habit(HabitBase):
 
 
 class TimeCode(str, Enum):
+    """Define a time code to specify repetition frequency"""
     day = 'day'
     week = 'week'
     month = 'month'
@@ -28,7 +29,7 @@ class TimeCode(str, Enum):
 
 class FrequencyBase(BaseModel):
     name: str
-    repeat: TimeCode  # FrequencyBase.repeat = TF.day
+    repeat: TimeCode  # FrequencyBase.repeat = TimeCode.day
 
     class Config:
         use_enum_values = True

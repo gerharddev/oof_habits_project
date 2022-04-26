@@ -1,7 +1,7 @@
 """Habit Tracking Entry Point."""
 
 import click
-from habits_backend.sql_app.main import *
+from habits_backend.restapi.fastapi_app import *
 
 
 @click.group()
