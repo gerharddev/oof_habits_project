@@ -4,16 +4,21 @@ from fastapi import APIRouter
 import habits_backend.schemas.frequencies as schema
 from habits_backend.database.connectors import *
 import habits_backend.crud.frequencies as crud
+from habits_backend.services.frequencies import frequencies_service
 
 router = APIRouter()
 
 
 @router.get("/frequencies/", response_model=list[schema.Frequency], tags=["frequencies"])
-async def read_frequencies(skip: int = 0, limit: int = 100):
-    with get_db() as session:
-        frequencies = crud.get_frequencies(session, skip=skip, limit=limit)
+async def read_frequencies():
+    return frequencies_service.get_all()
 
-    return frequencies
+# @router.get("/frequencies2/", response_model=list[schema.Frequency], tags=["frequencies"])
+# async def read_frequencies(skip: int = 0, limit: int = 100):
+#     with get_db() as session:
+#         frequencies = crud.get_frequencies(session, skip=skip, limit=limit)
+#
+#     return frequencies
 
 #
 # @router.post("/frequencies/", response_model=Frequency)

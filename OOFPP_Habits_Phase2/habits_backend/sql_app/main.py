@@ -40,20 +40,20 @@ def start_api_server():
         """Application root. Redirects to the docs page."""
         return RedirectResponse("/docs")
 
-    @app.get("/frequencies/", response_model=list[schemas.Frequency])
-    async def read_frequencies(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-        frequencies = crud.get_frequencies(db, skip=skip, limit=limit)
-        return frequencies
-
-    @app.post("/frequencies/", response_model=schemas.Frequency)
-    async def create_frequency(frequency: schemas.FrequencyCreate, db: Session = Depends(get_db)):
-        db_frequency = crud.get_frequency_by_name(db, name=frequency.name)
-        if db_frequency:
-            raise HTTPException(status_code=400, detail="Frequency already exist")
-        return crud.create_frequency(db=db, frequency=frequency)
+    # @app.get("/frequencies/", response_model=list[schemas.Frequency])
+    # async def read_frequencies(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    #     frequencies = crud.get_frequencies(db, skip=skip, limit=limit)
+    #     return frequencies
+    #
+    # @app.post("/frequencies/", response_model=schemas.Frequency)
+    # async def create_frequency(frequency: schemas.FrequencyCreate, db: Session = Depends(get_db)):
+    #     db_frequency = crud.get_frequency_by_name(db, name=frequency.name)
+    #     if db_frequency:
+    #         raise HTTPException(status_code=400, detail="Frequency already exist")
+    #     return crud.create_frequency(db=db, frequency=frequency)
 
     app.include_router(habits.router)
-    # app.include_router(frequencies.router)
+    app.include_router(frequencies.router)
 
     uvicorn.run(app, host="0.0.0.0", port=8000)
 
