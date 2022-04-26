@@ -1,16 +1,14 @@
-from sqlalchemy import Integer,String
+from sqlalchemy import Integer, String
 
-class Frequency():
-    """Frequency Model."""
+"""This file contains the model declarations used for saving the data"""
+from sqlalchemy import Column, Integer, String
+from habits_backend.database.connectors import Base
 
-    __tablename__ = 'frequency'
 
-    id = Integer(primary_key=True)
-    name = String(maxlength=50)
-    description = String(maxlength=255)
-    # TODO: frequency date
+class Frequency(Base):
+    __tablename__ = "frequencies"
 
-    def __init__(self, name, description):
-        """Initialize the frequency model."""
-        self.name = name
-        self.description = description
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, index=True)
+    repeat = Column(String)  # day, week, month or year
+

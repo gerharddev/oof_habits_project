@@ -1,6 +1,6 @@
 """This file is used for setting up a SQLAlchemy connection to SQLite"""
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, MetaData
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session, sessionmaker
 
@@ -9,14 +9,18 @@ SQLALCHEMY_DATABASE_URL = "sqlite:///./habits_tracking.db"
 
 # Create the SQLAlchemy engine
 # connect_args={"check_same_thread": False - Only required for SQLite because by default it only allows 1 thread
+# metadata = MetaData()
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
 )
+# metadata.create_all(engine)
 # Create a local database session
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
+
 def get_db() -> Session:
     """Return a new database session"""
-    session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-    return session()
+    return SessionLocal
+    # session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+    # return session()
