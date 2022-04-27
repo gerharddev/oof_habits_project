@@ -1,8 +1,7 @@
 """Habit Tracking Entry Point."""
 
 import click
-# from habits_backend.restapi.fastapi_app import *
-from sql_app.main import *
+from habits_backend.restapi.fastapi_app import *
 
 
 @click.group()
@@ -29,6 +28,7 @@ def start_rest_api():
     start_api_server()
 
 
+# TODO: Seeding of data
 cli.add_command(habit_cli)
 cli.add_command(start_rest_api)
 
