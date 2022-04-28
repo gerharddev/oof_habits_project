@@ -7,6 +7,11 @@ import habits_backend.schemas.completed_habits as schemas
 
 
 def get_by_id(db: Session, habit_id: int, skip: int = 0, limit: int = 100):
+    query = select(models.CompletedHabit).where(models.CompletedHabit.habit_id == habit_id).offset(skip).limit(limit)
+    return db.execute(query).scalars().all()
+
+
+def get_by_id_detailed(db: Session, habit_id: int, skip: int = 0, limit: int = 100):
     query = select(models.CompletedHabit).where(models.CompletedHabit.habit_id == habit_id).options(joinedload(
         models.CompletedHabit.habit).joinedload(sub_models.Habit.frequency)).offset(skip).limit(limit)
     return db.execute(query).scalars().all()

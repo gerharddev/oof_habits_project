@@ -10,6 +10,9 @@ class CompletedHabitBase(BaseModel):
 class CompletedHabitCreate(CompletedHabitBase):
     habit_id: int
 
+    class Config:
+        orm_mode = True
+
 
 class CompletedHabit(CompletedHabitBase):
     id: int
