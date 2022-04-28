@@ -13,7 +13,7 @@ class HabitsService:
 
     @classmethod
     def get_by_id(cls, habit_id) -> schemas.Habit:
-        """Returns a list casters ordered by ID"""
+        """Returns a habit by ID."""
         with get_db() as session:
             db_habit = crud.get_habit_by_id(session, habit_id)
 
@@ -21,7 +21,7 @@ class HabitsService:
 
     @classmethod
     def get_all(cls, skip, limit) -> List[schemas.Habit]:
-        """Returns a list casters ordered by ID"""
+        """Returns a list of habits ordered by ID."""
         with get_db() as session:
             db_habits = crud.get_habits(session, skip, limit)
 
@@ -30,7 +30,7 @@ class HabitsService:
 
     @classmethod
     def create(cls, habit: schemas.HabitCreate):
-        """Create a new frequency."""
+        """Create a new habit."""
         with get_db() as session:
             db_habit = crud.get_habit_by_name(session, name=habit.name)
             if db_habit:

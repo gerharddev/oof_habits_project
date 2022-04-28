@@ -9,7 +9,7 @@ router = APIRouter()
 
 
 @router.get("/habits/", response_model=list[schemas.Habit], tags=["habits"])
-async def get_all_habits(skip: int = 0, limit: int = 100):
+async def get_all(skip: int = 0, limit: int = 100):
     with get_db() as session:
         habits = habits_service.get_all(skip=skip, limit=limit)
 

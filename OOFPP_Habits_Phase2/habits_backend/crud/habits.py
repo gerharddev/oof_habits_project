@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import select
 
-import habits_backend.models.habits as models
+import habits_backend.models.habit as models
 import habits_backend.schemas.habits as schemas
 
 
