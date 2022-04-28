@@ -1,20 +1,27 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
+from sqlalchemy import select
 
 import habits_backend.models.habits as models
 import habits_backend.schemas.habits as schemas
 
 
-def get_habit(db: Session, habit_id: int):
-    return db.query(models.Habit).filter(models.Habit.id == habit_id).first()
+def get_habit_by_id(db: Session, habit_id: int):
+    query = select(models.Habit).where(models.Habit.id == habit_id).options(joinedload(models.Habit.frequency)).limit(1)
+    return db.execute(query).scalar()
+
+
+def get_habit_by_name(db: Session, name: str):
+    return db.query(models.Habit).filter(models.Habit.name == name).first()
 
 
 def get_habits(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Habit).offset(skip).limit(limit).all()
+    query = select(models.Habit).options(joinedload(models.Habit.frequency)).offset(skip).limit(limit)
+    return db.execute(query).scalars().all()
 
 
 def create_habit(db: Session, habit: schemas.HabitCreate):
-    db_user = models.Habit(name=habit.name)
-    db.add(db_user)
+    db_habit = models.Habit(**habit.dict())
+    db.add(db_habit)
     db.commit()
-    db.refresh(db_user)
-    return db_user
+    db.refresh(db_habit)
+    return db_habit

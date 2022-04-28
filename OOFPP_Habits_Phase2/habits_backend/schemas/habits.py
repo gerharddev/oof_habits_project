@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from .frequencies import Frequency
 
 
 class HabitBase(BaseModel):
@@ -7,12 +8,12 @@ class HabitBase(BaseModel):
 
 
 class HabitCreate(HabitBase):
-    pass
+    frequency_id: int
 
 
 class Habit(HabitBase):
     id: int
-    frequency_id: int
+    frequency: Frequency
 
     class Config:
         orm_mode = True
