@@ -128,6 +128,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Draw io backup files
+# Ignore my local files
 *.bkp
 *.tmp
+*.vscode
