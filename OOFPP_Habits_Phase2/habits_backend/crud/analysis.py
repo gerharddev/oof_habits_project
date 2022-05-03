@@ -8,11 +8,8 @@ import habits_backend.models.frequency as frequency_models
 import habits_backend.schemas.habits_metadata as schemas
 
 
-def is_tracked(db, habit_id):
-    query = select(func.count(completed_models.CompletedHabit.id)).where(completed_models.CompletedHabit.habit_id ==
-                                                                         habit_id)
-    count = db.execute(query).scalar()
-    return True if count > 0 else False
+def is_tracked(habit):
+    return True if habit["count"] > 0 else False
 
 
 def add_tracking_count(db, habit):
@@ -52,11 +49,8 @@ def get_habit_with_details(db: Session):
 
 
 def get_tracked_habits(db: Session):
-    query = select(habit_models.Habit.id, habit_models.Habit.name, frequency_models.Frequency.name.label(
-        "repeated")).join(habit_models.Habit.frequency)
-    habits = db.execute(query).all()
-    results = [(lambda h:  is_tracked(db, h.id))(h) for h in habits]
-    return results
+    habits = get_habit_with_details(db)
+    return list(filter(is_tracked, habits))
 
 
 # all habits, flag frequency, has completed tasks
