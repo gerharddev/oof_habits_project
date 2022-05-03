@@ -14,20 +14,50 @@ def is_tracked(db, habit_id):
     count = db.execute(query).scalar()
     return True if count > 0 else False
 
+
+def add_tracking_count(db, habit):
+    query = select(func.count(completed_models.CompletedHabit.id)).where(completed_models.CompletedHabit.habit_id ==
+                                                                         habit.id)
+    count = db.execute(query).scalar()
+    results = habit._asdict()
+    results["count"] = count
+
+    return results
+
+
 def get_habit_with_details(db: Session):
     # Get all the habits
+    # def is_tracked2(habit):
+    #     q = select(func.count(completed_models.CompletedHabit.id)).where(completed_models.CompletedHabit.habit_id ==
+    #                                                                          habit.id)
+    #     count = db.execute(q).scalar()
+    #     print(count)
+    #     return True if count > 0 else False
+
     query = select(habit_models.Habit.id, habit_models.Habit.name, frequency_models.Frequency.name.label(
         "repeated")).join(habit_models.Habit.frequency)
     habits = db.execute(query).all()
-    results = [(lambda h: (h, is_tracked(db, h.id)))(h) for h in habits]
-
+    results = [(lambda h:  add_tracking_count(db, h))(h) for h in habits]
+    # print(results[0])
+    # print(results[1])
+    # Only returned tracked
+    # test = list(filter(is_tracked2, habits))
+    # results = [(lambda h: (h, is_tracked(db, h.id)))(h) for h in habits]
+    # test = dict(results)
     # ids = [c.customers_id for h in habits]
     # test = list(map(is_tracked(db), habits))
     # my_list = list(map(is_tracked, habits))
     # Get the metadata from completed_habits table
+    return results
 
 
-    return []
+def get_tracked_habits(db: Session):
+    query = select(habit_models.Habit.id, habit_models.Habit.name, frequency_models.Frequency.name.label(
+        "repeated")).join(habit_models.Habit.frequency)
+    habits = db.execute(query).all()
+    results = [(lambda h:  is_tracked(db, h.id))(h) for h in habits]
+    return results
+
 
 # all habits, flag frequency, has completed tasks
 #

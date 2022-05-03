@@ -2,7 +2,7 @@
 Defines Completed Habits service.
 """
 from typing import List
-import habits_backend.schemas.completed_habits as schemas
+import habits_backend.schemas.habits_metadata as schemas
 from habits_backend.database.connectors import *
 import habits_backend.crud.analysis as crud
 
@@ -13,13 +13,24 @@ class AnalysisService:
 
 
     @classmethod
-    def get_all_details(cls) -> List[str]:
+    def get_all_details(cls) -> List[dict]:
         """Returns a list of habits being tracked.
         This mean a habit that was completed at least once"""
         with get_db() as session:
             db_details = crud.get_habit_with_details(session)
 
-        # habits = [] #[schemas.CompletedHabitCreate.from_orm(h) for h in db_habits]
+        # details = [schemas.HabitMetadata.from_orm(h) for h in db_details]
+        return db_details
+
+
+    @classmethod
+    def get_tracked_habits(cls) -> List[dict]:
+        """Returns a list of habits being tracked.
+        This mean a habit that was completed at least once"""
+        with get_db() as session:
+            db_details = crud.get_tracked_habits(session)
+
+        # details = [schemas.HabitMetadata.from_orm(h) for h in db_details]
         return db_details
 
 
