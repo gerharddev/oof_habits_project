@@ -28,7 +28,7 @@ class AnalysisService:
         """Returns a list of habits being tracked.
         This mean a habit that was completed at least once"""
         with get_db() as session:
-            db_details = crud.get_tracked_habits(session)
+            db_details = crud.get_tracked_habits(session)   # TODO: Call functional model
 
         # details = [schemas.HabitMetadata.from_orm(h) for h in db_details]
         return db_details

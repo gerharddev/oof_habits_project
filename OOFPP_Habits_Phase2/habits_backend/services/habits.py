@@ -3,6 +3,8 @@ Defines Habits service.
 """
 from typing import List
 from fastapi import HTTPException
+from fastapi.responses import JSONResponse
+
 import habits_backend.schemas.habits as schemas
 from habits_backend.database.connectors import *
 import habits_backend.crud.habits as crud
@@ -17,7 +19,10 @@ class HabitsService:
         with get_db() as session:
             db_habit = crud.get_habit_by_id(session, habit_id)
 
-        return schemas.Habit.from_orm(db_habit)
+        if db_habit is None:
+            return JSONResponse(status_code=404, content={"message": "No habit with this id found"})
+        else:
+            return schemas.Habit.from_orm(db_habit)
 
     @classmethod
     def get_all(cls, skip, limit) -> List[schemas.Habit]:

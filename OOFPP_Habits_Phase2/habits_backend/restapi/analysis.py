@@ -11,7 +11,7 @@ router = APIRouter(
     responses={404: {"description": "Not found"}})
 
 
-@router.get("/tracked_habits", response_model=list[dict])
+@router.get("/tracked", response_model=list[dict])
 async def get_tracked_habits():
     with get_db() as session:
         tracked = analysis_service.get_tracked_habits()
@@ -19,7 +19,7 @@ async def get_tracked_habits():
     return tracked
 
 
-@router.get("/habits_metadata", response_model=list[dict])
+@router.get("/metadata", response_model=list[dict])
 async def get_tracked_habits():
     with get_db() as session:
         tracked = analysis_service.get_all_details()

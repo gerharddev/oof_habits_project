@@ -28,7 +28,7 @@ async def get_by_habit_id(habit_id, skip: int = 0, limit: int = 100):
     return completed_habit
 
 
-@router.get("/detailed/{habit-id}", response_model=list[schemas.CompletedHabit])
+@router.get("/{habit-id}/detailed", response_model=list[schemas.CompletedHabit])
 async def get_by_habit_id_detailed(habit_id, skip: int = 0, limit: int = 100):
     with get_db() as session:
         completed_habit = completed_habits_service.get_by_id_detailed(habit_id, skip=skip, limit=limit)
