@@ -27,9 +27,9 @@ async def get_tracked_habits():
     return tracked
 
 
-@router.get("/equal_periodicity",  response_model=list[dict])
-async def get_equal_periodicity():
+@router.get("/equal_periodicity/{frequency}",  response_model=list[dict])
+async def get_equal_periodicity(frequency):
     with get_db() as session:
-        tracked = analysis_service.get_equal_periodicity()
+        tracked = analysis_service.get_equal_periodicity(frequency)
 
     return tracked

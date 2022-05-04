@@ -36,16 +36,20 @@ class AnalysisService:
 
         return JSONResponse(status_code=404, content={"message": "No habit is tracked!"})
 
-
     @classmethod
-    def get_equal_periodicity(cls) -> List[dict]:
+    def get_equal_periodicity(cls, frequency='daily') -> List[dict]:
         """Returns a list of habits with the same periodicity."""
 
         with get_db() as session:
             db_details = crud.get_habit_with_details(session)
 
-        #TODO: Call analysis module
-        return db_details
+        if db_details is not None:
+            tracked = analyse.get_equal_periodicity(db_details,frequency)
+            # details = [schemas.HabitMetadata.from_orm(h) for h in db_details]
+            if len(tracked) > 0:
+                return tracked
+
+        return JSONResponse(status_code=404, content={"message": "No habit with the same periodicity found!"})
 
 
 analysis_service = AnalysisService()
