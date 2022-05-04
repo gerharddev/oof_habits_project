@@ -35,3 +35,14 @@ class AnalysisService:
 
 
 analysis_service = AnalysisService()
+
+
+# 1. All currently tracked habits : Habits that have data in the completed habits table
+# 2. All habits with the same period - day, month
+# 3. Which habit has the longest run streak
+# 4. Longest run streak for a habit
+
+# - return a list of all currently tracked habits,
+# - return a list of all habits with the same periodicity,
+# - return the longest run streak of all defined habits,
+# - and return the longest run streak for a given habit.

@@ -47,7 +47,7 @@ def get_habit_with_details(db: Session):
     # Get the metadata from completed_habits table
     return results
 
-
+# TODO: Move to functional module
 def get_tracked_habits(db: Session):
     habits = get_habit_with_details(db)
     return list(filter(is_tracked, habits))
