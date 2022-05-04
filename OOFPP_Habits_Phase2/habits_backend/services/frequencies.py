@@ -22,7 +22,7 @@ class FrequenciesService:
         with get_db() as session:
             db_frequencies = crud.get_frequencies(session)
         frequencies = [schemas.Frequency.from_orm(h) for h in db_frequencies]
-        # from_orm: loads data into a model from an arbitrary class
+
         return frequencies
 
     @classmethod
