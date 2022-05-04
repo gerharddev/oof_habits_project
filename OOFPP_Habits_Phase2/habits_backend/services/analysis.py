@@ -2,16 +2,16 @@
 Defines Completed Habits service.
 """
 from typing import List
+from fastapi.responses import JSONResponse
 import habits_backend.schemas.habits_metadata as schemas
 from habits_backend.database.connectors import *
 import habits_backend.crud.analysis as crud
+import habits_backend.modules.analysis as analyse
 
 
 class AnalysisService:
     """The Analysis service.
     It will call analysis module written using the functional programming paradigm"""
-
-
     @classmethod
     def get_all_details(cls) -> List[dict]:
         """Returns a list of habits being tracked.
@@ -22,15 +22,29 @@ class AnalysisService:
         # details = [schemas.HabitMetadata.from_orm(h) for h in db_details]
         return db_details
 
-
     @classmethod
     def get_tracked_habits(cls) -> List[dict]:
         """Returns a list of habits being tracked.
         This mean a habit that was completed at least once"""
         with get_db() as session:
-            db_details = crud.get_tracked_habits(session)   # TODO: Call functional model
+            db_details = crud.get_habit_with_details(session)
 
-        # details = [schemas.HabitMetadata.from_orm(h) for h in db_details]
+        if db_details is not None:
+            tracked = analyse.get_tracked_habits(db_details)
+            # details = [schemas.HabitMetadata.from_orm(h) for h in db_details]
+            return tracked
+
+        return JSONResponse(status_code=404, content={"message": "No habit is tracked!"})
+
+
+    @classmethod
+    def get_equal_periodicity(cls) -> List[dict]:
+        """Returns a list of habits with the same periodicity."""
+
+        with get_db() as session:
+            db_details = crud.get_habit_with_details(session)
+
+        #TODO: Call analysis module
         return db_details
 
 

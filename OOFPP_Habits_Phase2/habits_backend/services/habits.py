@@ -21,8 +21,8 @@ class HabitsService:
 
         if db_habit is None:
             return JSONResponse(status_code=404, content={"message": "No habit with this id found"})
-        else:
-            return schemas.Habit.from_orm(db_habit)
+
+        return schemas.Habit.from_orm(db_habit)
 
     @classmethod
     def get_all(cls, skip, limit) -> List[schemas.Habit]:
