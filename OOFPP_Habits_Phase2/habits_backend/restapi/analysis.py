@@ -4,6 +4,7 @@ from fastapi import APIRouter
 from habits_backend.database.connectors import *
 from habits_backend.services.analysis import analysis_service
 import habits_backend.schemas.habits_metadata as schemas
+# TODO: Schema responses
 
 router = APIRouter(
     prefix="/analysis",
@@ -27,9 +28,25 @@ async def get_tracked_habits():
     return tracked
 
 
-@router.get("/equal_periodicity/{frequency}",  response_model=list[dict])
+@router.get("/equal_periodicity/{frequency}", response_model=list[dict])
 async def get_equal_periodicity(frequency):
     with get_db() as session:
         tracked = analysis_service.get_equal_periodicity(frequency)
 
     return tracked
+
+
+@router.get("/streak/{habit_id}", responses=list[dict])
+async def get_streak_by_habit_id(habit_id):
+    with get_db() as session:
+        streak = analysis_service.get_streak_by_habit_id(habit_id)
+
+    return streak
+
+
+@router.get("/streak", response=list[dict])
+async def get_longest_streak():
+    with get_db() as session:
+        streak = analysis_service.get_longest_streak()
+
+    return streak

@@ -51,6 +51,20 @@ class AnalysisService:
 
         return JSONResponse(status_code=404, content={"message": "No habit with the same periodicity found!"})
 
+    @classmethod
+    def get_streak_by_habit_id(cls, habit_id) ->List[dict]:
+        # TODO
+        # Get a list of all completed habits by id
+        # Send it to analysis
+        return None
+
+    @classmethod
+    def get_longest_streak(cls, habit_id) ->List[dict]:
+        # TODO
+        # Get a list of all completed habits
+        # Send it to analysis
+        # Return the longest streak for a habit
+        return None
 
 analysis_service = AnalysisService()
 
@@ -59,8 +73,3 @@ analysis_service = AnalysisService()
 # 2. All habits with the same period - day, month
 # 3. Which habit has the longest run streak
 # 4. Longest run streak for a habit
-
-# - return a list of all currently tracked habits,
-# - return a list of all habits with the same periodicity,
-# - return the longest run streak of all defined habits,
-# - and return the longest run streak for a given habit.
