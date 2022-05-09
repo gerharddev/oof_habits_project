@@ -17,7 +17,7 @@ class FrequenciesService:
     """The Frequency service."""
 
     @classmethod
-    def get_all(cls) -> List[schemas.Frequency]: # TODO: skip and limit
+    def get_all(cls) -> List[schemas.Frequency]:# TODO: skip and limit
         """Returns a list of frequencies order by ID."""
         with get_db() as session:
             db_frequencies = crud.get_frequencies(session)

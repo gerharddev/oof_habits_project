@@ -1,4 +1,4 @@
-"""This file is used for setting up a SQLAlchemy connection to SQLite"""
+"""This file is used for setting up a SQLAlchemy connection to SQLite."""
 
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.ext.declarative import declarative_base
@@ -16,7 +16,7 @@ def make_engine() -> Engine:
 
 
 def get_db() -> Session:
-    """Returns a new Session on App DB"""
+    """Returns a new Session on App DB."""
     session = sessionmaker(make_engine(), expire_on_commit=False)
     # session = sessionmaker(autocommit=False, autoflush=False, bind=make_engine())
     return session()
