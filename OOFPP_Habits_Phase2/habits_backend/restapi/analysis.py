@@ -36,7 +36,7 @@ async def get_equal_periodicity(frequency):
     return tracked
 
 
-@router.get("/streak/{habit_id}", responses=list[dict])
+@router.get("/streak/{habit_id}", response_model=list[dict])
 async def get_streak_by_habit_id(habit_id):
     with get_db() as session:
         streak = analysis_service.get_streak_by_habit_id(habit_id)
@@ -44,7 +44,7 @@ async def get_streak_by_habit_id(habit_id):
     return streak
 
 
-@router.get("/streak", response=list[dict])
+@router.get("/streak", response_model=list[dict])
 async def get_longest_streak():
     with get_db() as session:
         streak = analysis_service.get_longest_streak()

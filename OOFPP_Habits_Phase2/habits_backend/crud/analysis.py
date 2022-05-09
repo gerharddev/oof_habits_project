@@ -8,10 +8,6 @@ import habits_backend.models.frequency as frequency_models
 import habits_backend.schemas.habits_metadata as schemas
 
 
-# def is_tracked(habit):
-#     return True if habit["count"] > 0 else False
-
-
 def add_tracking_count(db, habit):
     query = select(func.count(completed_models.CompletedHabit.id)).where(completed_models.CompletedHabit.habit_id ==
                                                                          habit.id)
@@ -29,8 +25,5 @@ def get_habit_with_details(db: Session):
     results = [(lambda h:  add_tracking_count(db, h))(h) for h in habits]
 
     return results
-#
-# # TODO: Move to functional module
-# def get_tracked_habits(db: Session):
-#     habits = get_habit_with_details(db)
-#     return list(filter(is_tracked, habits))
+
+# Get completed habits by id. Must include the date

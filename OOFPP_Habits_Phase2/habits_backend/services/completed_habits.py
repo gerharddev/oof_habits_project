@@ -12,7 +12,7 @@ class CompletedHabitsService:
     """The Completed Habit service."""
 
     @classmethod
-    def get_by_id(cls, habit_id, skip, limit) -> List[schemas.CompletedHabitCreate]:
+    def get_by_id(cls, habit_id, skip: int = 0, limit: int = 100) -> List[schemas.CompletedHabitCreate]:
         """Returns a completed habit by ID."""
         with get_db() as session:
             db_habits = crud.get_by_id(session, habit_id)
