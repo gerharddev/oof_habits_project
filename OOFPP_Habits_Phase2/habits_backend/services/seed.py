@@ -6,6 +6,7 @@ from fastapi import HTTPException
 from habits_backend.database.connectors import *
 import habits_backend.crud.frequencies as frequencies_crud
 import habits_backend.crud.habits as habits_crud
+import habits_backend.crud.completed_habits as completed_crud
 
 
 def get_data(filename):
@@ -31,6 +32,7 @@ class SeedingService:
 
         with get_db() as db:
             cls.load_habits(db)
+            cls.load_completed_habits(db)
 
     @classmethod
     def load_habits(cls, db):
@@ -50,9 +52,11 @@ class SeedingService:
         dedupe = []
         for item in data:
             # Remove duplicate values
-            if habits_crud.get_habit_by_name(db, item["name"]) is None:
+            if not completed_crud.exist(db, item):
                 dedupe.append(item)
-        habits_crud.create_habits(db, dedupe)
+        #TODO: Create Bulk
+        raise('Create Bulk')
+        #completed_crud.create_habits(db, dedupe)
 
 
 seeding_service = SeedingService()

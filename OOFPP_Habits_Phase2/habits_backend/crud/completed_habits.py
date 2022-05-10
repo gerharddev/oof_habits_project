@@ -11,6 +11,13 @@ def get_by_id(db: Session, habit_id: int, skip: int = 0, limit: int = 100):
     return db.execute(query).scalars().all()
 
 
+def exist(db: Session, completed_habit: dict):
+    q = db.query(models.CompletedHabit).filter(models.CompletedHabit.habit_id == completed_habit["habit_id"]).filter(
+        models.CompletedHabit.completed_date == completed_habit["completed_date"])
+
+    return db.query(q.exists()).scalar()
+
+
 def get_by_id_detailed(db: Session, habit_id: int, skip: int = 0, limit: int = 100):
     query = select(models.CompletedHabit).where(models.CompletedHabit.habit_id == habit_id).options(joinedload(
         models.CompletedHabit.habit).joinedload(sub_models.Habit.frequency)).offset(skip).limit(limit)
