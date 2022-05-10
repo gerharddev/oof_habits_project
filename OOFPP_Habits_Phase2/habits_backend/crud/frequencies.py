@@ -30,6 +30,5 @@ def create_frequency(db: Session, frequency: schemas.FrequencyCreate):
 def recreate_frequencies(db: Session, frequencies: list[dict]):
     db.query(models.Frequency).delete()
     db.commit()
-    for frequency in frequencies:
-        db.add(models.Frequency(**frequency))
+    db.bulk_insert_mappings(models.Frequency, frequencies)
     db.commit()

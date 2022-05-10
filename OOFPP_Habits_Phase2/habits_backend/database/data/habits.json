@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Running",
+    "description": "Go running at least 10 min every day",
+    "frequency_id": 1
+  },
+  {
+    "name": "Meditation",
+    "description": "Spend quite time every day",
+    "frequency_id": 1
+  },
+  {
+    "name": "Family",
+    "description": "Do a fun activity with my family every day",
+    "frequency_id": 2
+  },
+    {
+    "name": "Holiday",
+    "description": "Take a holiday",
+    "frequency_id": 3
+  }
+]

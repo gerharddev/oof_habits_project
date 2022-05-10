@@ -35,7 +35,8 @@ cli.add_command(start_rest_api)
 
 if __name__ == '__main__':
     seeding_service.frequencies()
-    # Check flag and import sample data
+    # TODO: Check flag and import sample data. This will wipe existing data
+    seeding_service.sample_data()
     cli()
 
 # HOW TO USE:
