@@ -4,7 +4,6 @@ Defines Seed service used to load sample data to the database.
 import json
 from datetime import time, date, datetime
 from typing import Dict, Type, Any
-from fastapi import HTTPException
 from habits_backend.database.connectors import *
 import habits_backend.crud.frequencies as frequencies_crud
 import habits_backend.crud.habits as habits_crud
@@ -57,6 +56,7 @@ class SeedingService:
 
     @classmethod
     def load_habits(cls, db):
+        """Load sample habits for demo purposes"""
         # Habits
         data = get_data("./database/data/habits.json")
         dedupe = []
@@ -64,10 +64,11 @@ class SeedingService:
             # Remove duplicate values
             if habits_crud.get_habit_by_name(db, item["name"]) is None:
                 dedupe.append(item)
-        # habits_crud.create_habits(db, dedupe)
+        habits_crud.create_habits(db, dedupe)
 
     @classmethod
     def load_completed_habits(cls, db):
+        """Load sample completed habits for demo purposes"""
         # Completed Habits
         data = get_data("./database/data/completed_habits.json", key_to_type={'completed_date': datetime})
         dedupe = []
@@ -75,7 +76,7 @@ class SeedingService:
             # Remove duplicate values
             if not completed_crud.exist(db, item):
                 dedupe.append(item)
-        #TODO: Create Bulk
+
         completed_crud.create_list(db, dedupe)
 
 
