@@ -2,6 +2,7 @@
 
 import click
 from habits_backend.restapi.fastapi_app import *
+from habits_backend.services.seed import seeding_service
 
 
 @click.group()
@@ -33,6 +34,9 @@ cli.add_command(habit_cli)
 cli.add_command(start_rest_api)
 
 if __name__ == '__main__':
+    seeding_service.frequencies()
+    # TODO: Check flag and import sample data. This will wipe existing data
+    seeding_service.sample_data()
     cli()
 
 # HOW TO USE:

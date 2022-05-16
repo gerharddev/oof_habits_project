@@ -2,7 +2,7 @@
 Defines Completed Habits service.
 """
 from typing import List
-from fastapi import HTTPException
+from fastapi.responses import JSONResponse
 import habits_backend.schemas.completed_habits as schemas
 from habits_backend.database.connectors import *
 import habits_backend.crud.completed_habits as crud
@@ -12,10 +12,13 @@ class CompletedHabitsService:
     """The Completed Habit service."""
 
     @classmethod
-    def get_by_id(cls, habit_id, skip, limit) -> List[schemas.CompletedHabitCreate]:
+    def get_by_id(cls, habit_id, skip: int = 0, limit: int = 100) -> List[schemas.CompletedHabitCreate]:
         """Returns a completed habit by ID."""
         with get_db() as session:
             db_habits = crud.get_by_id(session, habit_id)
+
+        if len(db_habits) <= 0:
+            return JSONResponse(status_code=404, content={"message": "No completed habits found"})
 
         habits = [schemas.CompletedHabitCreate.from_orm(h) for h in db_habits]
         return habits

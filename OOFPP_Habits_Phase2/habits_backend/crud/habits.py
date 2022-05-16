@@ -25,3 +25,14 @@ def create_habit(db: Session, habit: schemas.HabitCreate):
     db.commit()
     db.refresh(db_habit)
     return db_habit
+
+
+def create_habits(db: Session, habits: list[dict]):
+    # Check if values exist, and do not re-insert
+    # db.query(models.Habit).delete()
+    # db.commit()
+    # db.add_all(models.Habit, habits)
+    if len(habits) <= 0:
+        return
+    db.bulk_insert_mappings(models.Habit, habits)
+    db.commit()

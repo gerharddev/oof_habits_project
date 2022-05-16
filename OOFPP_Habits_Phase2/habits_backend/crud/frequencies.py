@@ -1,7 +1,14 @@
 from sqlalchemy.future import select
 from sqlalchemy.orm import Session
+from sqlalchemy.sql.expression import func
 import habits_backend.models.frequency as models
 import habits_backend.schemas.frequencies as schemas
+
+
+def has_frequencies(db: Session) -> bool:
+    query = select(func.count(models.Frequency.id))
+    count = db.execute(query).scalar()
+    return True if count > 0 else False
 
 
 def get_frequencies(db: Session, skip: int = 0, limit: int = 100):
@@ -18,3 +25,10 @@ def create_frequency(db: Session, frequency: schemas.FrequencyCreate):
     db.commit()
     db.refresh(db_frequency)
     return db_frequency
+
+
+def recreate_frequencies(db: Session, frequencies: list[dict]):
+    db.query(models.Frequency).delete()
+    db.commit()
+    db.bulk_insert_mappings(models.Frequency, frequencies)
+    db.commit()

@@ -10,7 +10,7 @@ Information:
 import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
-from . import habits, frequencies, completed_habits
+from . import habits, frequencies, completed_habits, analysis
 from habits_backend.database.connectors import Base, make_engine
 
 
@@ -29,5 +29,6 @@ def start_api_server():
     app.include_router(habits.router)
     app.include_router(frequencies.router)
     app.include_router(completed_habits.router)
+    app.include_router(analysis.router)
 
     uvicorn.run(app, host="0.0.0.0", port=8000)
