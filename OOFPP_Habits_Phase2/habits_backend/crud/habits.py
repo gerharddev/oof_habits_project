@@ -32,5 +32,7 @@ def create_habits(db: Session, habits: list[dict]):
     # db.query(models.Habit).delete()
     # db.commit()
     # db.add_all(models.Habit, habits)
+    if len(habits) <= 0:
+        return
     db.bulk_insert_mappings(models.Habit, habits)
     db.commit()

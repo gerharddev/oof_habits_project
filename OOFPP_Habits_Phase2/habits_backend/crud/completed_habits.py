@@ -36,3 +36,10 @@ def create(db: Session, completed_habit: schemas.CompletedHabitCreate):
     db.commit()
     db.refresh(db_completed_habit)
     return db_completed_habit
+
+
+# TODO: Get correct schema
+def create_list(db: Session, completed_habits: list[dict]):
+    # TODO: Handle failure
+    db.bulk_insert_mappings(models.CompletedHabit, completed_habits)
+    db.commit()
