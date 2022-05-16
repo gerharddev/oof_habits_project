@@ -8,7 +8,7 @@ from habits_backend.database.connectors import *
 import habits_backend.crud.analysis as crud
 import habits_backend.modules.analysis as analyse
 from habits_backend.services.completed_habits import completed_habits_service as completed_service
-
+from habits_backend.services.habits import habits_service
 
 class AnalysisService:
     """The Analysis service.
@@ -32,7 +32,7 @@ class AnalysisService:
 
         if db_details is not None:
             tracked = analyse.get_tracked_habits(db_details)
-            # details = [schemas.HabitMetadata.from_orm(h) for h in db_details]
+            # TODO: details = [schemas.HabitMetadata.from_orm(h) for h in db_details]
             return tracked
 
         return JSONResponse(status_code=404, content={"message": "No habit is tracked!"})
@@ -55,16 +55,15 @@ class AnalysisService:
     @classmethod
     def get_streak_by_habit_id(cls, habit_id) -> List[dict]:
         """Returns the longest steak for a habit by habit id."""
-        with get_db() as session:
-            db_habit = completed_service.get_by_id(habit_id)
+        db_completed = completed_service.get_by_id(habit_id)
+        frequency = habits_service.get_frequency(habit_id)
 
-        if db_habit is None:
+        if db_completed is None or frequency is None:
             return JSONResponse(status_code=404, content={"message": "No habit with this id found"})
 
         # TODO
-        # Get a list of all completed habits by id
-        # Send it to analysis
-        return db_habit
+        tracked = analyse.get_streak_by_habit_id(db_completed, frequency)
+        return tracked
 
     @classmethod
     def get_longest_streak(cls, habit_id) ->List[dict]:
