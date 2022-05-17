@@ -45,24 +45,26 @@ def get_tracked_habits(habits):
     return list(filter(is_tracked, habits))
 
 
-# def range(item1, item2):
-#     return
-
 def get_streak_by_habit_id(completed, frequency):
     """Return a date range for the longest streak for a specific habit."""
     # Sort the list by dates ascending
     sorted_tasks = sorted(completed, key=lambda d: d.completed_date)
-    new_list = []   #TODO: Add 1st date and blank date
-    streak_cnt = 0
+
+    # The streak is 1 till we find consecutive days
+    streak = dict({"start": sorted_tasks[0], "end": sorted_tasks[0], "cnt": 1})
+    streak_current = dict({"start": sorted_tasks[0], "end": sorted_tasks[0], "cnt": 1})
+
     for i in range(len(sorted_tasks)-1):
         if is_streak(sorted_tasks[i].completed_date, sorted_tasks[i+1].completed_date, frequency):
-            print('Streak - Extend end date')
+            streak_current['end'] = sorted_tasks[i+1].completed_date
+            streak_current['cnt'] += 1
+            if streak_current['cnt'] > streak['cnt']:
+                streak = streak_current.copy()
         else:
-            print(str(sorted_tasks[1].completed_date))
-            print(str(sorted_tasks[i].completed_date))
-            print('Streak - broken')
-        # if sorted_tasks[i].completed_date and sorted_tasks[i+1].completed_date follow, count for streak
-        # new_list.append(dictsorted_tasks[i].completed_date + sorted_tasks[i+1].completed_date)
+            streak_current['start'] = sorted_tasks[i+1].completed_date
+            streak_current['cnt'] = 1
+
+    return streak
 
 
     # from functools import reduce

@@ -53,7 +53,7 @@ class AnalysisService:
         return JSONResponse(status_code=404, content={"message": "No habit with the same periodicity found!"})
 
     @classmethod
-    def get_streak_by_habit_id(cls, habit_id) -> List[dict]:
+    def get_streak_by_habit_id(cls, habit_id) -> dict:
         """Returns the longest steak for a habit by habit id."""
         db_completed = completed_service.get_by_id(habit_id)
         frequency = habits_service.get_frequency(habit_id)
@@ -61,12 +61,10 @@ class AnalysisService:
         if db_completed is None or frequency is None:
             return JSONResponse(status_code=404, content={"message": "No habit with this id found"})
 
-        # TODO
-        tracked = analyse.get_streak_by_habit_id(db_completed, frequency)
-        return tracked
+        return analyse.get_streak_by_habit_id(db_completed, frequency)
 
     @classmethod
-    def get_longest_streak(cls, habit_id) ->List[dict]:
+    def get_longest_streak(cls, habit_id) -> List[dict]:
         # TODO
         # Get a list of all completed habits
         # Send it to analysis
