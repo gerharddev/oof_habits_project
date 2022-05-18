@@ -15,13 +15,33 @@ def is_equal_period(habit, frequency):
     return habit["repeated"].lower() == frequency.lower()
 
 
-def is_streak(item1, item2, frequency):
+def diff_days(d1, d2):
+    """Calculate the number of days between two dates."""
+    return abs((d1 - d2).days)
+
+
+def diff_weeks(d1, d2):
+    """Calculate the number of weeks between two dates."""
+    days = abs(d1-d2).days  # Always return a positive number
+    return days//7
+
+
+def diff_months(d1, d2):
+    """Calculate the number of months between two dates."""
+    months = (d1.year - d2.year) * 12 + d1.month - d2.month
+    return abs(months)  # Always return a positive number
+
+
+def is_streak(d1, d2, frequency):
     """Check if to items are still a valid streak. Check depending on the frequency rules."""
     import datetime
 
     if str.lower(frequency) == 'day':
-        diff = item2 - item1
-        return True if diff.days <= 1 else False
+        return True if diff_days(d1, d2) <= 1 else False
+    elif str.lower(frequency) == 'week':
+        return True if diff_weeks(d1, d2) <= 1 else False
+    elif str.lower(frequency) == 'month':
+        return True if diff_months(d1, d2) <= 1 else False
 
 
 def custom_filter(function, iterable, frequency):
@@ -58,21 +78,12 @@ def get_streak_by_habit_id(completed, frequency):
         if is_streak(sorted_tasks[i].completed_date, sorted_tasks[i+1].completed_date, frequency):
             streak_current['end'] = sorted_tasks[i+1].completed_date
             streak_current['cnt'] += 1
+            # Check if the current streak is longer than the previous longest streak
             if streak_current['cnt'] > streak['cnt']:
                 streak = streak_current.copy()
         else:
+            # Streak was broken reset count and start with next streak
             streak_current['start'] = sorted_tasks[i+1].completed_date
             streak_current['cnt'] = 1
 
     return streak
-
-
-    # from functools import reduce
-    #
-    # new_list = reduce(lambda a, b: dict([a, b]), sorted_tasks)
-    # Use functional
-    # Sort list by date
-    # Loop over list and get streaks depending on frequency - day, week
-    # Return longest streak
-
-    return "not implemented"

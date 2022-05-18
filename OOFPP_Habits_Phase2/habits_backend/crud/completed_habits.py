@@ -1,6 +1,6 @@
+"""This file contains the CRUD operations for the completed habits."""
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import select
-
 import habits_backend.models.completed_habit as models
 import habits_backend.models.habit as sub_models
 import habits_backend.schemas.completed_habits as schemas
