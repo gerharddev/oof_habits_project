@@ -66,6 +66,7 @@ class AnalysisService:
     @classmethod
     def get_longest_streak(cls, habit_id) -> List[dict]:
         # TODO
+        # Get a list of habit ids and for each
         # Get a list of all completed habits
         # Get the longest streak per habit id
         # Return the longest streak for a habit

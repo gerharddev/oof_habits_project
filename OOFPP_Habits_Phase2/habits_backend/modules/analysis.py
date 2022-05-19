@@ -17,19 +17,19 @@ def is_equal_period(habit, frequency):
 
 def diff_days(d1, d2):
     """Calculate the number of days between two dates."""
-    return abs((d1 - d2).days)
+    return (d2 - d1).days
 
 
 def diff_weeks(d1, d2):
     """Calculate the number of weeks between two dates."""
-    days = abs(d1-d2).days  # Always return a positive number
+    days = (d2-d1).days
     return days//7
 
 
 def diff_months(d1, d2):
     """Calculate the number of months between two dates."""
-    months = (d1.year - d2.year) * 12 + d1.month - d2.month
-    return abs(months)  # Always return a positive number
+    months = (d2.year - d1.year) * 12 + d2.month - d1.month
+    return months
 
 
 def is_streak(d1, d2, frequency):
@@ -71,8 +71,8 @@ def get_streak_by_habit_id(completed, frequency):
     sorted_tasks = sorted(completed, key=lambda d: d.completed_date)
 
     # The streak is 1 till we find consecutive days
-    streak = dict({"start": sorted_tasks[0], "end": sorted_tasks[0], "cnt": 1})
-    streak_current = dict({"start": sorted_tasks[0], "end": sorted_tasks[0], "cnt": 1})
+    streak = dict({"start": sorted_tasks[0].completed_date, "end": sorted_tasks[0].completed_date, "cnt": 1})
+    streak_current = dict({"start": sorted_tasks[0].completed_date, "end": sorted_tasks[0].completed_date, "cnt": 1})
 
     for i in range(len(sorted_tasks)-1):
         if is_streak(sorted_tasks[i].completed_date, sorted_tasks[i+1].completed_date, frequency):

@@ -7,16 +7,16 @@
   {
     "name": "Meditation",
     "description": "Spend quite time every day",
-    "frequency_id": 1
+    "frequency_id": 2
   },
   {
     "name": "Family",
     "description": "Do a fun activity with my family every day",
-    "frequency_id": 2
+    "frequency_id": 3
   },
     {
     "name": "Holiday",
     "description": "Take a holiday",
-    "frequency_id": 3
+    "frequency_id": 4
   }
 ]
