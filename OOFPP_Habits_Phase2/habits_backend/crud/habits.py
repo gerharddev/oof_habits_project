@@ -19,8 +19,14 @@ def get_habits(db: Session, skip: int = 0, limit: int = 100):
     return db.execute(query).scalars().all()
 
 
+def get_habits_ids(db: Session):
+    query = select(models.Habit.id)
+    return db.execute(query).scalars().all()
+
+
 def get_frequency(db: Session, habit_id: int):
-    query = select(frequency_model.Frequency.repeat).where(models.Habit.id == habit_id).join(models.Habit.frequency).limit(1)
+    query = select(frequency_model.Frequency.repeat).where(models.Habit.id == habit_id).join(
+        models.Habit.frequency).limit(1)
     return db.execute(query).scalar()
 
 
