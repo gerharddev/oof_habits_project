@@ -15,6 +15,35 @@ def is_equal_period(habit, frequency):
     return habit["repeated"].lower() == frequency.lower()
 
 
+def diff_days(d1, d2):
+    """Calculate the number of days between two dates."""
+    return (d2 - d1).days
+
+
+def diff_weeks(d1, d2):
+    """Calculate the number of weeks between two dates."""
+    days = (d2-d1).days
+    return days//7
+
+
+def diff_months(d1, d2):
+    """Calculate the number of months between two dates."""
+    months = (d2.year - d1.year) * 12 + d2.month - d1.month
+    return months
+
+
+def is_streak(d1, d2, frequency):
+    """Check if to items are still a valid streak. Check depending on the frequency rules."""
+    import datetime
+
+    if str.lower(frequency) == 'day':
+        return True if diff_days(d1, d2) <= 1 else False
+    elif str.lower(frequency) == 'week':
+        return True if diff_weeks(d1, d2) <= 1 else False
+    elif str.lower(frequency) == 'month':
+        return True if diff_months(d1, d2) <= 1 else False
+
+
 def custom_filter(function, iterable, frequency):
     """Custom filter function to filter habits with the same frequency."""
     from functools import reduce
@@ -36,3 +65,25 @@ def get_tracked_habits(habits):
     return list(filter(is_tracked, habits))
 
 
+def get_streak_by_habit_id(completed, frequency):
+    """Return a date range for the longest streak for a specific habit."""
+    # Sort the list by dates ascending
+    sorted_tasks = sorted(completed, key=lambda d: d.completed_date)
+
+    # The streak is 1 till we find consecutive days
+    streak = dict({"start": sorted_tasks[0].completed_date, "end": sorted_tasks[0].completed_date, "cnt": 1})
+    streak_current = dict({"start": sorted_tasks[0].completed_date, "end": sorted_tasks[0].completed_date, "cnt": 1})
+
+    for i in range(len(sorted_tasks)-1):
+        if is_streak(sorted_tasks[i].completed_date, sorted_tasks[i+1].completed_date, frequency):
+            streak_current['end'] = sorted_tasks[i+1].completed_date
+            streak_current['cnt'] += 1
+            # Check if the current streak is longer than the previous longest streak
+            if streak_current['cnt'] > streak['cnt']:
+                streak = streak_current.copy()
+        else:
+            # Streak was broken reset count and start with next streak
+            streak_current['start'] = sorted_tasks[i+1].completed_date
+            streak_current['cnt'] = 1
+
+    return streak

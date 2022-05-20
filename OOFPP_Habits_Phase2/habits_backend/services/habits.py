@@ -34,6 +34,12 @@ class HabitsService:
         return habits
 
     @classmethod
+    def get_frequency(cls, habit_id) -> str:
+        """Returns a frequency of a habit by habit ID."""
+        with get_db() as session:
+            return crud.get_frequency(session, habit_id) or None
+
+    @classmethod
     def create(cls, habit: schemas.HabitCreate):
         """Create a new habit."""
         with get_db() as session:

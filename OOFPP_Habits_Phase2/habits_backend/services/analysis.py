@@ -8,6 +8,19 @@ from habits_backend.database.connectors import *
 import habits_backend.crud.analysis as crud
 import habits_backend.modules.analysis as analyse
 from habits_backend.services.completed_habits import completed_habits_service as completed_service
+from habits_backend.services.habits import habits_service
+from habits_backend.crud.habits import get_habits_ids
+
+
+def get_steak_by_id(habit_id):
+    """Return the longest streak for a specific habit."""
+    db_completed = completed_service.get_by_id(habit_id)
+    frequency = habits_service.get_frequency(habit_id)
+
+    if db_completed is None or frequency is None:
+        return None
+
+    return analyse.get_streak_by_habit_id(db_completed, frequency)
 
 
 class AnalysisService:
@@ -32,7 +45,7 @@ class AnalysisService:
 
         if db_details is not None:
             tracked = analyse.get_tracked_habits(db_details)
-            # details = [schemas.HabitMetadata.from_orm(h) for h in db_details]
+            # TODO: details = [schemas.HabitMetadata.from_orm(h) for h in db_details]
             return tracked
 
         return JSONResponse(status_code=404, content={"message": "No habit is tracked!"})
@@ -53,31 +66,27 @@ class AnalysisService:
         return JSONResponse(status_code=404, content={"message": "No habit with the same periodicity found!"})
 
     @classmethod
-    def get_streak_by_habit_id(cls, habit_id) -> List[dict]:
+    def get_streak_by_habit_id(cls, habit_id) -> dict:
         """Returns the longest steak for a habit by habit id."""
-        with get_db() as session:
-            db_habit = completed_service.get_by_id(habit_id)
-
-        if db_habit is None:
-            return JSONResponse(status_code=404, content={"message": "No habit with this id found"})
-
-        # TODO
-        # Get a list of all completed habits by id
-        # Send it to analysis
-        return db_habit
+        # TODO - Should I call crud or service
+        streak = get_steak_by_id(habit_id)
+        if streak is not None:
+            return streak
+        return JSONResponse(status_code=404, content={"message": "No habit with this id found"})
 
     @classmethod
-    def get_longest_streak(cls, habit_id) ->List[dict]:
-        # TODO
-        # Get a list of all completed habits
-        # Send it to analysis
-        # Return the longest streak for a habit
-        return []
+    def get_longest_streak(cls) -> dict:
+        """Return the longest running streak and for which habit."""
+        # TODO - Should I call crud or service
+        with get_db() as session:
+            ids = get_habits_ids(session)
+
+        streaks = []
+        for habit_id in ids:
+            streak = get_steak_by_id(habit_id)
+            if streak is not None:
+                streaks.append({**streak, 'habit_id': habit_id})
+        return max(streaks, key=lambda x: x['cnt'])
+
 
 analysis_service = AnalysisService()
-
-
-# 1. All currently tracked habits : Habits that have data in the completed habits table
-# 2. All habits with the same period - day, month
-# 3. Which habit has the longest run streak
-# 4. Longest run streak for a habit

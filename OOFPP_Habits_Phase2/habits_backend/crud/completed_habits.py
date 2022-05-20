@@ -1,13 +1,17 @@
+"""This file contains the CRUD operations for the completed habits."""
 from sqlalchemy.orm import Session, joinedload
-from sqlalchemy import select
-
+from sqlalchemy import select, desc
 import habits_backend.models.completed_habit as models
 import habits_backend.models.habit as sub_models
 import habits_backend.schemas.completed_habits as schemas
 
 
 def get_by_id(db: Session, habit_id: int, skip: int = 0, limit: int = 100):
-    query = select(models.CompletedHabit).where(models.CompletedHabit.habit_id == habit_id).offset(skip).limit(limit)
+    """Get completed habits by habit_id and sort them by completed date."""
+    query = select(models.CompletedHabit).where(models.CompletedHabit.habit_id == habit_id).order_by(
+        models.CompletedHabit.completed_date).offset(
+        skip).limit(
+        limit)
     return db.execute(query).scalars().all()
 
 
@@ -19,14 +23,18 @@ def exist(db: Session, completed_habit: dict):
 
 
 def get_by_id_detailed(db: Session, habit_id: int, skip: int = 0, limit: int = 100):
+    """Get completed habits including detailed data by habit_id and sort them by completed date."""
     query = select(models.CompletedHabit).where(models.CompletedHabit.habit_id == habit_id).options(joinedload(
-        models.CompletedHabit.habit).joinedload(sub_models.Habit.frequency)).offset(skip).limit(limit)
+        models.CompletedHabit.habit).joinedload(sub_models.Habit.frequency)).order_by(
+        models.CompletedHabit.completed_date).offset(skip).limit(limit)
     return db.execute(query).scalars().all()
 
 
 def get_all(db: Session, skip: int = 0, limit: int = 100):
+    """Get all completed habits and sort them by habit_id and completed date."""
     query = select(models.CompletedHabit).options(joinedload(models.CompletedHabit.habit).joinedload(
-        sub_models.Habit.frequency)).offset(skip).limit(limit)
+        sub_models.Habit.frequency)).order_by(models.CompletedHabit.habit_id,
+                                              models.CompletedHabit.completed_date).offset(skip).limit(limit)
     return db.execute(query).scalars().all()
 
 
