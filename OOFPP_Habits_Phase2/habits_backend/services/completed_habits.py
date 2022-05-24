@@ -12,7 +12,7 @@ class CompletedHabitsService:
     """The Completed Habit service."""
 
     @classmethod
-    def get_by_id(cls, habit_id, skip: int = 0, limit: int = 100) -> List[schemas.CompletedHabitCreate]:
+    def get_by_id(cls, habit_id, skip: int = 0, limit: int = 100) -> List[schemas.CompletedHabitQuery]:
         """Returns a completed habit by ID."""
         with get_db() as session:
             db_habits = crud.get_by_id(session, habit_id)
@@ -20,7 +20,7 @@ class CompletedHabitsService:
         if len(db_habits) <= 0:
             return JSONResponse(status_code=404, content={"message": "No completed habits found"})
 
-        habits = [schemas.CompletedHabitCreate.from_orm(h) for h in db_habits]
+        habits = [schemas.CompletedHabitQuery.from_orm(h) for h in db_habits]
         return habits
 
     @classmethod
