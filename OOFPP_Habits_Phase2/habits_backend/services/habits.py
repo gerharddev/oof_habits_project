@@ -48,5 +48,11 @@ class HabitsService:
                 raise HTTPException(status_code=400, detail="Habit with this name already exist")
         return crud.create_habit(db=session, habit=habit)
 
+    @classmethod
+    def delete(cls, id: int):
+        """Delete item by id."""
+        with get_db() as session:
+            return crud.delete(db=session, id=id)
+
 
 habits_service = HabitsService()

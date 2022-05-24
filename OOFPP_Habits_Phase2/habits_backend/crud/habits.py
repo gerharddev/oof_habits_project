@@ -47,3 +47,16 @@ def create_habits(db: Session, habits: list[dict]):
         return
     db.bulk_insert_mappings(models.Habit, habits)
     db.commit()
+
+
+def delete(db: Session, id: int):
+    """Delete the Habit with all the completed habits."""
+    # Does the habit exist
+    exists = db.query(models.Habit).where(models.Habit.id == id).scalar()
+    if exists is None:
+        return None  # Nothing found, return None
+    # TODO: Delete all completed habits also
+    # Item found, delete it
+    db.query(models.Habit).where(models.Habit.id == id).delete()
+    db.commit()
+    return "Deleted"

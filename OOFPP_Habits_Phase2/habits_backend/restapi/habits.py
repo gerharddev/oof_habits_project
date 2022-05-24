@@ -4,6 +4,7 @@ from fastapi import APIRouter
 import habits_backend.schemas.habits as schemas
 from habits_backend.database.connectors import *
 from habits_backend.services.habits import habits_service
+from fastapi.responses import JSONResponse
 
 router = APIRouter(
     prefix="/habits",
@@ -31,3 +32,10 @@ async def get_by_id(habit_id):
 async def create_habit(habit: schemas.HabitCreate):
     return habits_service.create(habit=habit)
 
+
+@router.delete("/{id}")
+async def deleted_completed_habit(id: int):
+    deleted = habits_service.delete(id=id)
+
+    return JSONResponse(status_code=200, content={"message": "Deleted"}) if deleted is not None else JSONResponse(
+        status_code=404, content={"message": "Completed habit not found"})
