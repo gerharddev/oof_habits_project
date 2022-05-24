@@ -11,7 +11,7 @@ router = APIRouter(
     responses={404: {"description": "Not found"}})
 
 
-@router.get("", response_model=list[schemas.CompletedHabitCreate])
+@router.get("", response_model=list[schemas.CompletedHabitQuery])
 async def get_all(skip: int = 0, limit: int = 100):
     with get_db() as session:
         completed_habits = completed_habits_service.get_all(skip=skip, limit=limit)
@@ -36,6 +36,10 @@ async def get_by_habit_id_detailed(habit_id, skip: int = 0, limit: int = 100):
 
 
 @router.post("", response_model=schemas.CompletedHabit)
-async def create_habit(completed_habit: schemas.CompletedHabitCreate):
+async def create_completed_habit(completed_habit: schemas.CompletedHabitCreate):
     return completed_habits_service.create(completed_habit=completed_habit)
+
+@router.delete("/{id}")
+async def deleted_completed_habit(id):
+    return id
 

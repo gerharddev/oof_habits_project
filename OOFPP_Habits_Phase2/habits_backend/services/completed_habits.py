@@ -33,12 +33,12 @@ class CompletedHabitsService:
         return habits
 
     @classmethod
-    def get_all(cls, skip, limit) -> List[schemas.CompletedHabitCreate]:
+    def get_all(cls, skip, limit) -> List[schemas.CompletedHabitQuery]:
         """Returns a list of completed habits ordered by completed date."""
         with get_db() as session:
             db_habits = crud.get_all(session, skip, limit)
 
-        habits = [schemas.CompletedHabitCreate.from_orm(h) for h in db_habits]
+        habits = [schemas.CompletedHabitQuery.from_orm(h) for h in db_habits]
         return habits
 
     @classmethod

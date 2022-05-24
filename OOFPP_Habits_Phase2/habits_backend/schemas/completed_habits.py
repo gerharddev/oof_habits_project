@@ -4,10 +4,19 @@ from datetime import datetime
 
 
 class CompletedHabitBase(BaseModel):
+    id: int
     completed_date: datetime
 
 
-class CompletedHabitCreate(CompletedHabitBase):
+class CompletedHabitQuery(CompletedHabitBase):
+    habit_id: int
+
+    class Config:
+        orm_mode = True
+
+
+class CompletedHabitCreate(BaseModel):
+    completed_date: datetime
     habit_id: int
 
     class Config:
@@ -15,7 +24,6 @@ class CompletedHabitCreate(CompletedHabitBase):
 
 
 class CompletedHabit(CompletedHabitBase):
-    id: int
     habit: Habit
 
     class Config:

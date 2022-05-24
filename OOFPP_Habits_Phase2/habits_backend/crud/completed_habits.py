@@ -16,6 +16,7 @@ def get_by_id(db: Session, habit_id: int, skip: int = 0, limit: int = 100):
 
 
 def exist(db: Session, completed_habit: dict):
+    """Check if a completed habit with these details exist."""
     q = db.query(models.CompletedHabit).filter(models.CompletedHabit.habit_id == completed_habit["habit_id"]).filter(
         models.CompletedHabit.completed_date == completed_habit["completed_date"])
 
