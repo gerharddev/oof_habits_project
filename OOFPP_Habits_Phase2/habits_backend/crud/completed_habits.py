@@ -8,6 +8,10 @@ import habits_backend.schemas.completed_habits as schemas
 
 def get_by_id(db: Session, habit_id: int, skip: int = 0, limit: int = 100):
     """Get completed habits by habit_id and sort them by completed date."""
+    exists = db.query(models.CompletedHabit).where(models.CompletedHabit.habit_id == habit_id).limit(1).scalar()
+    if exists is None:
+        return None
+
     query = select(models.CompletedHabit).where(models.CompletedHabit.habit_id == habit_id).order_by(
         models.CompletedHabit.completed_date).offset(
         skip).limit(
@@ -52,3 +56,15 @@ def create_list(db: Session, completed_habits: list[dict]):
     # TODO: Handle failure
     db.bulk_insert_mappings(models.CompletedHabit, completed_habits)
     db.commit()
+
+
+def delete(db: Session, id: int):
+    # Does an entry with this id exist
+    exists = db.query(models.CompletedHabit).where(models.CompletedHabit.id == id).scalar()
+    if exists is None:
+        return None  # Nothing found, return None
+
+    # Item found, delete it
+    db.query(models.CompletedHabit).where(models.CompletedHabit.id == id).delete()
+    db.commit()
+    return "Deleted"

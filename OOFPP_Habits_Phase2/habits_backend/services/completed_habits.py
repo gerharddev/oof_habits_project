@@ -2,7 +2,6 @@
 Defines Completed Habits service.
 """
 from typing import List
-from fastapi.responses import JSONResponse
 import habits_backend.schemas.completed_habits as schemas
 from habits_backend.database.connectors import *
 import habits_backend.crud.completed_habits as crud
@@ -17,11 +16,7 @@ class CompletedHabitsService:
         with get_db() as session:
             db_habits = crud.get_by_id(session, habit_id)
 
-        if len(db_habits) <= 0:
-            return JSONResponse(status_code=404, content={"message": "No completed habits found"})
-
-        habits = [schemas.CompletedHabitQuery.from_orm(h) for h in db_habits]
-        return habits
+        return [schemas.CompletedHabitQuery.from_orm(h) for h in db_habits] if db_habits is not None else None
 
     @classmethod
     def get_by_id_detailed(cls, habit_id, skip, limit) -> List[schemas.CompletedHabit]:
@@ -46,6 +41,12 @@ class CompletedHabitsService:
         """Create a new completed habit."""
         with get_db() as session:
             return crud.create(db=session, completed_habit=completed_habit)
+
+    @classmethod
+    def delete(cls, id: int):
+        """Delete item by id."""
+        with get_db() as session:
+            return crud.delete(db=session, id=id)
 
 
 completed_habits_service = CompletedHabitsService()
