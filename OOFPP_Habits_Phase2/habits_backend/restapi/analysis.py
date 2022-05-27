@@ -20,12 +20,12 @@ async def get_tracked_habits():
     return tracked
 
 
-@router.get("/metadata", response_model=list[dict])
-async def get_tracked_habits():
-    with get_db() as session:
-        tracked = analysis_service.get_all_details()
-
-    return tracked
+# @router.get("/metadata", response_model=list[dict])
+# async def get_tracked_habits():
+#     with get_db() as session:
+#         tracked = analysis_service.get_all_details()
+#
+#     return tracked
 
 
 @router.get("/equal_periodicity/{frequency}", response_model=list[dict])
