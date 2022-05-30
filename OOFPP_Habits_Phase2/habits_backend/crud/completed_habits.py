@@ -59,6 +59,7 @@ def create_list(db: Session, completed_habits: list[dict]):
 
 
 def delete(db: Session, id: int):
+    """Delete the completed habit for this id."""
     # Does an entry with this id exist
     exists = db.query(models.CompletedHabit).where(models.CompletedHabit.id == id).scalar()
     if exists is None:

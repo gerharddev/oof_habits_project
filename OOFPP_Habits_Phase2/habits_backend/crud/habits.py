@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import select
 import habits_backend.models.habit as models
+import habits_backend.models.completed_habit as completed_models
 import habits_backend.models.frequency as frequency_model
 import habits_backend.schemas.habits as schemas
 
@@ -55,8 +56,8 @@ def delete(db: Session, id: int):
     exists = db.query(models.Habit).where(models.Habit.id == id).scalar()
     if exists is None:
         return None  # Nothing found, return None
-    # TODO: Delete all completed habits also
     # Item found, delete it
+    db.query(completed_models.CompletedHabit).where(completed_models.CompletedHabit.habit_id == id).delete()
     db.query(models.Habit).where(models.Habit.id == id).delete()
     db.commit()
     return "Deleted"
