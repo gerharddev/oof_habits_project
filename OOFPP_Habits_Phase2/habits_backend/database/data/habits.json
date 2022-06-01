@@ -7,6 +7,11 @@
   {
     "name": "Meditation",
     "description": "Spend quite time every day",
+    "frequency_id": 1
+  },
+  {
+    "name": "PersonalTime",
+    "description": "Spend 1 hour a week doing something I like",
     "frequency_id": 2
   },
   {
@@ -17,6 +22,6 @@
     {
     "name": "Holiday",
     "description": "Take a holiday",
-    "frequency_id": 4
+    "frequency_id": 3
   }
 ]
