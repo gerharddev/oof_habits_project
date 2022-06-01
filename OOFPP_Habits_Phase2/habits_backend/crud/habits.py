@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session, joinedload
-from sqlalchemy import select
+from sqlalchemy import select, update
 import habits_backend.models.habit as models
 import habits_backend.models.completed_habit as completed_models
 import habits_backend.models.frequency as frequency_model
@@ -39,8 +39,27 @@ def create_habit(db: Session, habit: schemas.HabitCreate):
     return db_habit
 
 
+def update_habit(db: Session, habit: schemas.HabitUpdate):
+    query = (select(models.Habit)
+             .where(models.Habit.id == habit.id))
+    exist = db.execute(query).scalars().first()
+    if exist is None:
+        return None
+
+    db.query(models.Habit).filter(models.Habit.id == habit.id).update({'name': habit.name, 'description':
+        habit.description})
+    db.commit()
+    return "Updated"
+
+    # query = (update(models.Habit)
+    #          .where(models.Habit.id == habit.id)
+    #          .values(name=habit.name))
+    # db.execute(query).scalar()
+    # return "Updated"
+
+
 def create_habits(db: Session, habits: list[dict]):
-    # Check if values exist, and do not re-insert
+    # TODO: Check if values exist, and do not re-insert
     # db.query(models.Habit).delete()
     # db.commit()
     # db.add_all(models.Habit, habits)

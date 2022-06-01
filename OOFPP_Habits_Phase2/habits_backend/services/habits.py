@@ -49,6 +49,12 @@ class HabitsService:
         return crud.create_habit(db=session, habit=habit)
 
     @classmethod
+    def update(cls, habit: schemas.HabitUpdate):
+        """Update a habit."""
+        with get_db() as session:
+            return crud.update_habit(db=session, habit=habit)
+
+    @classmethod
     def delete(cls, id: int):
         """Delete item by id."""
         with get_db() as session:

@@ -11,6 +11,10 @@ class HabitCreate(HabitBase):
     frequency_id: int
 
 
+class HabitUpdate(HabitBase):
+    id: int
+
+
 class Habit(HabitBase):
     id: int
     frequency: Frequency
