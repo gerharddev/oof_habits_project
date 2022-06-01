@@ -14,14 +14,14 @@ def cli():
 @click.command()
 def data_seed():
     """Load testing data into the database."""
-    click.echo("Seeding data")
     data_service.sample_data()
+    click.echo("Seeded data")
 
 
 @click.command()
 def data_clear():
     """Clear habit data from the database."""
-    # TODO
+    data_service.clear_database()
     click.echo("Database Cleared")
 
 
@@ -65,7 +65,6 @@ def start_rest_api():
     start_api_server()
 
 
-# TODO: Seeding of data
 cli.add_command(data_seed)
 cli.add_command(data_clear)
 cli.add_command(analyse_tracked_habits)

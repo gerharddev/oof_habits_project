@@ -1,4 +1,4 @@
-"""Habits endpoints"""
+"""Habits endpoints."""
 
 from fastapi import APIRouter
 import habits_backend.schemas.habits as schemas
