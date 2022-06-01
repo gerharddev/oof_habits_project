@@ -1,4 +1,4 @@
-"""Frequencies endpoints"""
+"""Frequencies endpoints."""
 
 from fastapi import APIRouter
 import habits_backend.schemas.frequencies as schemas
@@ -12,10 +12,7 @@ router = APIRouter(
 
 @router.get("", response_model=list[schemas.Frequency])
 async def get_all_frequencies():
+    """Get all frequencies."""
     return frequencies_service.get_all()
 
-
-# @router.post("", response_model=schemas.Frequency)
-# async def create_frequency(frequency: schemas.FrequencyCreate):
-#     return frequencies_service.create(frequency=frequency)
 
