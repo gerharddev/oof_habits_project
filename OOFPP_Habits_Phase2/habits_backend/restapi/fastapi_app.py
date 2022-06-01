@@ -10,7 +10,7 @@ Information:
 import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
-from . import habits, frequencies, completed_habits, analysis
+from . import habits, frequencies, completed_habits, analysis, data
 from habits_backend.database.connectors import Base, make_engine
 
 
@@ -26,8 +26,9 @@ def start_api_server():
         """Application root. Redirects to the docs page."""
         return RedirectResponse("/docs")
 
-    app.include_router(habits.router)
+    app.include_router(data.router)
     app.include_router(frequencies.router)
+    app.include_router(habits.router)
     app.include_router(completed_habits.router)
     app.include_router(analysis.router)
 

@@ -2,7 +2,7 @@
 
 import click
 from habits_backend.restapi.fastapi_app import *
-from habits_backend.services.seed import seeding_service
+from habits_backend.services.data import data_service
 from habits_backend.services.analysis import analysis_service
 
 
@@ -14,14 +14,15 @@ def cli():
 @click.command()
 def data_seed():
     """Load testing data into the database."""
-    click.echo("Seed")
+    click.echo("Seeding data")
+    data_service.sample_data()
 
 
 @click.command()
 def data_clear():
     """Clear habit data from the database."""
-    click.echo("Clear")
-
+    # TODO
+    click.echo("Database Cleared")
 
 
 @click.command()
@@ -74,9 +75,7 @@ cli.add_command(analyse_longest_streak)
 cli.add_command(start_rest_api)
 
 if __name__ == '__main__':
-    seeding_service.frequencies()
-    # TODO: Move seed and clear to operations
-    seeding_service.sample_data()
+    data_service.frequencies()
     cli()
 
 # HOW TO USE:

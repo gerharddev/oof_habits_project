@@ -15,7 +15,7 @@ async def get_all_frequencies():
     return frequencies_service.get_all()
 
 
-@router.post("", response_model=schemas.Frequency)
-async def create_frequency(frequency: schemas.FrequencyCreate):
-    return frequencies_service.create(frequency=frequency)
+# @router.post("", response_model=schemas.Frequency)
+# async def create_frequency(frequency: schemas.FrequencyCreate):
+#     return frequencies_service.create(frequency=frequency)
 

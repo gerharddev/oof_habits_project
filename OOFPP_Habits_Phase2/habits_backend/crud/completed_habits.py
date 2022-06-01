@@ -69,3 +69,10 @@ def delete(db: Session, id: int):
     db.query(models.CompletedHabit).where(models.CompletedHabit.id == id).delete()
     db.commit()
     return "Deleted"
+
+
+def delete_all(db: Session):
+    """Delete all the completed habits."""
+    db.query(models.CompletedHabit).delete()
+    db.commit()
+    return "Deleted"

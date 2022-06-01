@@ -33,6 +33,13 @@ async def create_habit(habit: schemas.HabitCreate):
     return habits_service.create(habit=habit)
 
 
+@router.put("", response_model=schemas.Habit)
+async def update_habit(habit: schemas.HabitCreate):
+    #TODO: Update habit
+    pass
+    # return habits_service.create(habit=habit)
+
+
 @router.delete("/{id}")
 async def deleted_completed_habit(id: int):
     deleted = habits_service.delete(id=id)

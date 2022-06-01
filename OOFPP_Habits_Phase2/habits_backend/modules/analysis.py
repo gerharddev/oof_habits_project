@@ -1,7 +1,6 @@
 """
-This module contains the Habit analysis class.
-
-We will use functional programming concepts.
+This module contains the Habit analysis.
+We used functional programming concepts in this module.
 """
 
 
