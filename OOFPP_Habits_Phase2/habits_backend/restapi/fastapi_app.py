@@ -19,7 +19,6 @@ def start_api_server():
 
     app = FastAPI()
     Base.metadata.create_all(bind=make_engine())    # Create all database table
-    # TODO: Seed testing data
 
     @app.get("/", tags=["root"])
     def root():

@@ -8,6 +8,7 @@ from habits_backend.database.connectors import *
 import habits_backend.crud.frequencies as frequencies_crud
 import habits_backend.crud.habits as habits_crud
 import habits_backend.crud.completed_habits as completed_crud
+import habits_backend.schemas.completed_habits as schemas
 
 
 def _parser(dct, types: Dict[str, Type]):
@@ -74,7 +75,8 @@ class DataService:
         dedupe = []
         for item in data:
             # Remove duplicate values
-            if not completed_crud.exist(db, item):
+            parsed_item = schemas.CompletedHabitCreate.parse_obj(item)
+            if not completed_crud.exist(db, parsed_item):
                 dedupe.append(item)
 
         completed_crud.create_list(db, dedupe)

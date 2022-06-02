@@ -19,11 +19,10 @@ def get_by_id(db: Session, habit_id: int, skip: int = 0, limit: int = 100):
     return db.execute(query).scalars().all()
 
 
-def exist(db: Session, completed_habit: dict):
+def exist(db: Session, completed_habit: schemas.CompletedHabitCreate):
     """Check if a completed habit with these details exist."""
-    q = db.query(models.CompletedHabit).filter(models.CompletedHabit.habit_id == completed_habit["habit_id"]).filter(
-        models.CompletedHabit.completed_date == completed_habit["completed_date"])
-
+    q = db.query(models.CompletedHabit).filter(models.CompletedHabit.habit_id == completed_habit.habit_id).filter(
+        models.CompletedHabit.completed_date == completed_habit.completed_date)
     return db.query(q.exists()).scalar()
 
 
@@ -44,6 +43,8 @@ def get_all(db: Session, skip: int = 0, limit: int = 100):
 
 
 def create(db: Session, completed_habit: schemas.CompletedHabitCreate):
+    if exist(db, completed_habit):
+        return "Duplicate"
     db_completed_habit = models.CompletedHabit(**completed_habit.dict())
     db.add(db_completed_habit)
     db.commit()

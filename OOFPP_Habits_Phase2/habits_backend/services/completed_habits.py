@@ -40,7 +40,8 @@ class CompletedHabitsService:
     def create(cls, completed_habit: schemas.CompletedHabitCreate):
         """Create a new completed habit."""
         with get_db() as session:
-            return crud.create(db=session, completed_habit=completed_habit)
+            results = crud.create(db=session, completed_habit=completed_habit)
+            return results
 
     @classmethod
     def delete(cls, id: int):
