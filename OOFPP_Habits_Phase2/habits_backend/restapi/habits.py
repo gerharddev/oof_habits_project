@@ -24,8 +24,8 @@ async def get_all(skip: int = 0, limit: int = 100):
 async def get_by_id(habit_id):
     with get_db() as session:
         habit = habits_service.get_by_id(habit_id)
-    # TODO JsonResponse here
-    return habit
+
+    return habit if habit is not None else JSONResponse(status_code=404, content={"message": "Habit not found"})
 
 
 @router.post("", response_model=schemas.Habit)
