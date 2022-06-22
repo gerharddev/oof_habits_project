@@ -18,13 +18,13 @@ def start_api_server():
     """Start the REST API"""
 
     app = FastAPI()
-    Base.metadata.create_all(bind=make_engine())    # Create all database table
+    Base.metadata.create_all(bind=make_engine())    # Create all database tables
 
     @app.get("/", tags=["root"])
     def root():
         """Application root. Redirects to the docs page."""
         return RedirectResponse("/docs")
-
+    # Add the api routes to the main application
     app.include_router(data.router)
     app.include_router(frequencies.router)
     app.include_router(habits.router)
