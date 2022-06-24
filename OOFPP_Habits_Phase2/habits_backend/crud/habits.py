@@ -1,5 +1,8 @@
+"""
+CRUD Operations for habits.
+"""
 from sqlalchemy.orm import Session, joinedload
-from sqlalchemy import select, update
+from sqlalchemy import select
 import habits_backend.models.habit as models
 import habits_backend.models.completed_habit as completed_models
 import habits_backend.models.frequency as frequency_model
@@ -7,33 +10,46 @@ import habits_backend.schemas.habits as schemas
 
 
 def get_habit_by_id(db: Session, habit_id: int):
+    """Get a habit by id."""
+    # Select a habit by id and only return one item. Include the frequency details
     query = select(models.Habit).where(models.Habit.id == habit_id).options(joinedload(models.Habit.frequency)).limit(1)
+    # Execute the query and return the results
     return db.execute(query).scalar()
 
 
 def get_habit_by_name(db: Session, name: str):
-    return db.query(models.Habit).filter(models.Habit.name == name).first()
+    """Get a habit by name."""
+    query = select(models.Habit).filter(models.Habit.name == name)
+    return db.execute(query).scalar()
+    # return db.query(models.Habit).filter(models.Habit.name == name).first()
 
 
 def get_habits(db: Session, skip: int = 0, limit: int = 100):
+    """Get a list of habits."""
     query = select(models.Habit).options(joinedload(models.Habit.frequency)).offset(skip).limit(limit)
     return db.execute(query).scalars().all()
 
 
 def get_habits_ids(db: Session):
+    """Get a list of habit ids."""
     query = select(models.Habit.id)
     return db.execute(query).scalars().all()
 
 
 def get_frequency(db: Session, habit_id: int):
+    """Get frequency details (by habit id) for a habit."""
     query = select(frequency_model.Frequency.repeat).where(models.Habit.id == habit_id).join(
         models.Habit.frequency).limit(1)
     return db.execute(query).scalar()
 
 
 def create_habit(db: Session, habit: schemas.HabitCreate):
+    """Create a habit."""
+    # Unpacking (mapping fields) from the HabitCreate schema to the Habit model
     db_habit = models.Habit(**habit.dict())
+    # Create the habit in the database
     db.add(db_habit)
+    # Commit the transaction
     db.commit()
     db.refresh(db_habit)
     return db_habit
