@@ -45,6 +45,7 @@ class DataService:
         """Load frequencies if they do not exist."""
         with get_db() as session:
             if not frequencies_crud.has_frequencies(session):
+                # Load the test data from the json file
                 data = get_data("./database/data/frequencies.json")
                 if len(data) > 0:
                     return frequencies_crud.recreate_frequencies(db=session, frequencies=data)

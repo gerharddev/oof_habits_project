@@ -17,7 +17,7 @@ class CompletedHabitsService:
         """Returns a completed habit by ID."""
         with get_db() as session:
             db_habits = crud.get_by_id(session, habit_id)
-
+        # For each item in the list parse the data to the orm model and return the results
         return [schemas.CompletedHabitQuery.from_orm(h) for h in db_habits] if db_habits is not None else None
 
     # Declare a class method. Can be called by using classname.methodname()
@@ -26,7 +26,7 @@ class CompletedHabitsService:
         """Returns a completed habit by ID."""
         with get_db() as session:
             db_habits = crud.get_by_id_detailed(session, habit_id)
-
+        # For each item in the list parse the data to the orm model and return the results
         habits = [schemas.CompletedHabit.from_orm(h) for h in db_habits]
         return habits
 
@@ -36,7 +36,7 @@ class CompletedHabitsService:
         """Returns a list of completed habits ordered by completed date."""
         with get_db() as session:
             db_habits = crud.get_all(session, skip, limit)
-
+        # For each item in the list parse the data to the orm model and return the results
         habits = [schemas.CompletedHabitQuery.from_orm(h) for h in db_habits]
         return habits
 

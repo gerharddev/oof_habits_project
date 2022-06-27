@@ -23,6 +23,7 @@ class FrequenciesService:
         """Returns a list of frequencies order by ID."""
         with get_db() as session:
             db_frequencies = crud.get_frequencies(session)
+        # For each item in the list parse the data to the orm model and return the results
         frequencies = [schemas.Frequency.from_orm(h) for h in db_frequencies]
 
         return frequencies
@@ -34,7 +35,9 @@ class FrequenciesService:
         with get_db() as session:
             db_frequency = crud.get_frequency_by_name(session, name=frequency.name)
             if db_frequency:
+                # Http response 400 - Duplicate value
                 raise HTTPException(status_code=400, detail="Frequency already exist")
+        # Return the created frequency
         return crud.create_frequency(db=session, frequency=frequency)
 
 
