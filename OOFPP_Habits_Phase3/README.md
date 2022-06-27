@@ -1,8 +1,17 @@
-# TODO: To follow after Conception
+# Habit Tracking Application
 
-## Overview
+## 1. Overview
 
-## Running the project
+Everybody wants to stop unhealthy habits and create good habits in its place. They are turning to technology for assistance to achieving this. I was tasked to create a backend for a habit tracking application that will assist users to achieve their goals.
+
+## 2. Running the project
+
+### 2.1 Prerequisites
+
+**Python 3.7** or later. (Python 3.10.3 was used for development)
+
+### 2.2 Installing the project
+
 
 ## Using the project
 
@@ -56,3 +65,8 @@ To run the test open your terminal in the habits_backend folder and run
 ```
 pytest test_sample.py
 ```
+
+## Rules
+
+- dayly - 24 hours
+- Montly
