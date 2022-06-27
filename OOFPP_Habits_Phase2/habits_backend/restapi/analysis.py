@@ -12,6 +12,7 @@ router = APIRouter(
     responses={404: {"description": "Not found"}})
 
 
+# Http GET method
 @router.get("/tracked", response_model=list[dict])
 async def get_tracked_habits():
     """Get all tracked habits."""
@@ -21,6 +22,7 @@ async def get_tracked_habits():
     return tracked
 
 
+# Http GET method
 @router.get("/equal_periodicity/{frequency}", response_model=list[dict])
 async def get_equal_periodicity(frequency):
     """Get all habits with the same periodicity."""
@@ -30,6 +32,7 @@ async def get_equal_periodicity(frequency):
     return tracked
 
 
+# Http GET method
 @router.get("/streak/{habit_id}", response_model=dict)
 async def get_streak_by_habit_id(habit_id):
     """Get the longest streak for a habit by id."""
@@ -39,6 +42,7 @@ async def get_streak_by_habit_id(habit_id):
     return streak
 
 
+# Http GET method
 @router.get("/streak", response_model=dict)
 async def get_longest_streak():
     """Get the habit with the longest streak. Search all habits."""

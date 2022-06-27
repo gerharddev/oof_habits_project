@@ -10,6 +10,7 @@ router = APIRouter(
     responses={404: {"description": "Not found"}})
 
 
+# Http GET method
 @router.get("", response_model=list[schemas.Frequency])
 async def get_all_frequencies():
     """Get all frequencies."""

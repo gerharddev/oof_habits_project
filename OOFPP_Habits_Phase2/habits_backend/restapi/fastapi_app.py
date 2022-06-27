@@ -15,8 +15,9 @@ from habits_backend.database.connectors import Base, make_engine
 
 
 def start_api_server():
-    """Start the REST API"""
+    """Start the REST API."""
 
+    # Create a FastAPI instance
     app = FastAPI()
     Base.metadata.create_all(bind=make_engine())    # Create all database tables
 
