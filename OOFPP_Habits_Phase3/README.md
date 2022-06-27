@@ -8,14 +8,23 @@ Everybody wants to stop unhealthy habits and create good habits in its place. Th
 
 ### 2.1 Prerequisites
 
-**Python 3.7** or later. (Python 3.10.3 was used for development)
+**Python 3.7** or later. (Python 3.10.3 was used for development). Download the latest version [here](https://www.python.org/downloads/)
 
 ### 2.2 Installing the project
 
+- Open CommandPrompt on Windows or Terminal on Mac after cloning the project from github
+- Go to the root folder of your project where you will see a setup.py file
+- Run the following command
 
-## Using the project
+  ```
+  pip install .
+  ```
 
-### Running the cli
+- If you see `Successfully installed OOFPP-Habits-Phase3-1.0` the project is ready to be run.
+
+## 3. Using the project
+
+### 3.1 Running the cli
 
 ```
 python main.py --help
@@ -41,7 +50,7 @@ python main.py start-rest-api
 python main.py habit-cli --add Test
 python main.py habit-cli --command Test
 
-#### Start Rest API (Swagger UI)
+### 3.2 Start Rest API (Swagger UI)
 
 ```
 python main.py start-rest-api
@@ -50,7 +59,16 @@ python main.py start-rest-api
 To see the OpenAPI documentation browse to
 http://127.0.0.1:8000/docs
 
-## Libraries used
+### 3.3 Running the tests
+
+We are using pytest as our testing framework.
+To run the test open your terminal in the tests folder and run
+
+```
+pytest habits_backend/test_main.py
+```
+
+## 4. Libraries used
 
 - pylint
 - pytest: For testing
@@ -58,13 +76,6 @@ http://127.0.0.1:8000/docs
 - sqlite3: Database
 
 ## Testing
-
-We are using pytest as our testing framework.
-To run the test open your terminal in the habits_backend folder and run
-
-```
-pytest test_sample.py
-```
 
 ## Rules
 
