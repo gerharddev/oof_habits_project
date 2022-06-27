@@ -66,7 +66,10 @@ To run the test open your terminal in the tests folder and run
 
 ```
 pytest habits_backend/test_main.py
+
+pytest habits_backend/test_services.py::test_rest_api
 ```
+
 
 ## 4. Libraries used
 
