@@ -1,7 +1,6 @@
 """
-This module contains the Habit analysis class.
-
-We will use functional programming concepts.
+This module contains the Habit analysis.
+We used functional programming concepts in this module.
 """
 
 
@@ -34,7 +33,6 @@ def diff_months(d1, d2):
 
 def is_streak(d1, d2, frequency):
     """Check if to items are still a valid streak. Check depending on the frequency rules."""
-    import datetime
 
     if str.lower(frequency) == 'day':
         return True if diff_days(d1, d2) <= 1 else False

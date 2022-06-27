@@ -1,4 +1,4 @@
-"""This file contains the habits model declaration used for saving the data"""
+"""This file contains the habits model declaration used for saving the data."""
 from sqlalchemy import DateTime, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 from datetime import datetime

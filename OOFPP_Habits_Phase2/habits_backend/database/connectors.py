@@ -1,6 +1,9 @@
-"""This file is used for setting up a SQLAlchemy connection to SQLite."""
+"""
+This file is used for setting up a SQLAlchemy connection to SQLite.
+Details: https://docs.sqlalchemy.org/en/14/core/connections.html#basic-usage
+"""
 
-from sqlalchemy import create_engine, MetaData
+from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session, sessionmaker
 from sqlalchemy.engine import Engine
@@ -11,12 +14,11 @@ Base = declarative_base()
 
 
 def make_engine() -> Engine:
-    return create_engine(
-        SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
+    """Return an Engine object. """
+    return create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
 
 
 def get_db() -> Session:
     """Returns a new Session on App DB."""
     session = sessionmaker(make_engine(), expire_on_commit=False)
-    # session = sessionmaker(autocommit=False, autoflush=False, bind=make_engine())
     return session()

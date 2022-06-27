@@ -1,5 +1,5 @@
 """
-Defines Seed service used to load sample data to the database.
+Defines Data service used to load and delete sample data to the database.
 """
 import json
 from datetime import time, date, datetime
@@ -8,11 +8,12 @@ from habits_backend.database.connectors import *
 import habits_backend.crud.frequencies as frequencies_crud
 import habits_backend.crud.habits as habits_crud
 import habits_backend.crud.completed_habits as completed_crud
+import habits_backend.schemas.completed_habits as schemas
 
 
 def _parser(dct, types: Dict[str, Type]):
     """Parse columns in the dict to specified data types
-    e.g. str to datetime"""
+    e.g. str to datetime."""
     if not types:
         return dct
 
@@ -34,18 +35,22 @@ def get_data(filename, key_to_type: Dict[str, Type] = None) -> Dict[str, Any]:
         return json.load(f, object_hook=lambda dct: _parser(dct, key_to_type))
 
 
-class SeedingService:
-    """The Habit service."""
+# Data service class
+class DataService:
+    """The Data service class."""
 
+    # Declare a class method. Can be called by using data_service.frequencies() (classname.methodname())
     @classmethod
     def frequencies(cls):
         """Load frequencies if they do not exist."""
         with get_db() as session:
             if not frequencies_crud.has_frequencies(session):
+                # Load the test data from the json file
                 data = get_data("./database/data/frequencies.json")
                 if len(data) > 0:
                     return frequencies_crud.recreate_frequencies(db=session, frequencies=data)
 
+    # Declare a class method. Can be called by using classname.methodname()
     @classmethod
     def sample_data(cls):
         """Load sample data to demonstrate application functionality."""
@@ -54,6 +59,7 @@ class SeedingService:
             cls.load_habits(db)
             cls.load_completed_habits(db)
 
+    # Declare a class method. Can be called by using classname.methodname()
     @classmethod
     def load_habits(cls, db):
         """Load sample habits for demo purposes"""
@@ -66,6 +72,7 @@ class SeedingService:
                 dedupe.append(item)
         habits_crud.create_habits(db, dedupe)
 
+    # Declare a class method. Can be called by using classname.methodname()
     @classmethod
     def load_completed_habits(cls, db):
         """Load sample completed habits for demo purposes"""
@@ -74,11 +81,21 @@ class SeedingService:
         dedupe = []
         for item in data:
             # Remove duplicate values
-            if not completed_crud.exist(db, item):
+            parsed_item = schemas.CompletedHabitCreate.parse_obj(item)
+            if not completed_crud.exist(db, parsed_item):
                 dedupe.append(item)
 
         completed_crud.create_list(db, dedupe)
 
+    # Declare a class method. Can be called by using classname.methodname()
+    @classmethod
+    def clear_database(cls):
+        """Clear all Habits and Completed habits from the database."""
+        with get_db() as session:
+            completed_crud.delete_all(session)
+            return habits_crud.delete_all(session)
 
-seeding_service = SeedingService()
+
+# Create an instance of the DataService
+data_service = DataService()
 
