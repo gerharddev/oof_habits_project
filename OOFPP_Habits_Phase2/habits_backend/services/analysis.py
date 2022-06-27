@@ -38,8 +38,10 @@ class AnalysisService:
 
     @classmethod
     def get_tracked_habits(cls) -> List[dict]:
-        """Returns a list of habits being tracked.
-        This mean a habit that was completed at least once"""
+        """
+        Returns a list of habits being tracked.
+        This mean a habit that was completed at least once.
+        """
         with get_db() as session:
             db_details = crud.get_habit_with_details(session)
 
