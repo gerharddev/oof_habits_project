@@ -13,11 +13,13 @@ from habits_backend.database.connectors import *
 import habits_backend.crud.frequencies as crud
 
 
+# Frequencies service class
 class FrequenciesService:
-    """The Frequency service."""
+    """The Frequency service class."""
 
+    # Declare a class method. Can be called by using frequencies_service.get_all() (classname.methodname())
     @classmethod
-    def get_all(cls) -> List[schemas.Frequency]:# TODO: skip and limit
+    def get_all(cls) -> List[schemas.Frequency]:
         """Returns a list of frequencies order by ID."""
         with get_db() as session:
             db_frequencies = crud.get_frequencies(session)
@@ -25,6 +27,7 @@ class FrequenciesService:
 
         return frequencies
 
+    # Declare a class method. Can be called by using (classname.methodname())
     @classmethod
     def create(cls, frequency: schemas.FrequencyCreate):
         """Create a new frequency."""
@@ -35,4 +38,5 @@ class FrequenciesService:
         return crud.create_frequency(db=session, frequency=frequency)
 
 
+# Create an instance of the FrequenciesService
 frequencies_service = FrequenciesService()

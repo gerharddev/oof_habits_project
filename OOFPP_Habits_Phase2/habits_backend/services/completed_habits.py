@@ -7,9 +7,11 @@ from habits_backend.database.connectors import *
 import habits_backend.crud.completed_habits as crud
 
 
+# Completed habits service class
 class CompletedHabitsService:
     """The Completed Habit service."""
 
+    # Declare a class method. Can be called by using completed_habits_service.get_by_id (classname.methodname())
     @classmethod
     def get_by_id(cls, habit_id, skip: int = 0, limit: int = 100) -> List[schemas.CompletedHabitQuery]:
         """Returns a completed habit by ID."""
@@ -18,6 +20,7 @@ class CompletedHabitsService:
 
         return [schemas.CompletedHabitQuery.from_orm(h) for h in db_habits] if db_habits is not None else None
 
+    # Declare a class method. Can be called by using classname.methodname()
     @classmethod
     def get_by_id_detailed(cls, habit_id, skip, limit) -> List[schemas.CompletedHabit]:
         """Returns a completed habit by ID."""
@@ -27,6 +30,7 @@ class CompletedHabitsService:
         habits = [schemas.CompletedHabit.from_orm(h) for h in db_habits]
         return habits
 
+    # Declare a class method. Can be called by using classname.methodname()
     @classmethod
     def get_all(cls, skip, limit) -> List[schemas.CompletedHabitQuery]:
         """Returns a list of completed habits ordered by completed date."""
@@ -36,6 +40,7 @@ class CompletedHabitsService:
         habits = [schemas.CompletedHabitQuery.from_orm(h) for h in db_habits]
         return habits
 
+    # Declare a class method. Can be called by using classname.methodname()
     @classmethod
     def create(cls, completed_habit: schemas.CompletedHabitCreate):
         """Create a new completed habit."""
@@ -43,6 +48,7 @@ class CompletedHabitsService:
             results = crud.create(db=session, completed_habit=completed_habit)
             return results
 
+    # Declare a class method. Can be called by using classname.methodname()
     @classmethod
     def delete(cls, id: int):
         """Delete item by id."""
@@ -50,4 +56,5 @@ class CompletedHabitsService:
             return crud.delete(db=session, id=id)
 
 
+# Create an instance of the CompletedHabitsService
 completed_habits_service = CompletedHabitsService()

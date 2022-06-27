@@ -35,9 +35,11 @@ def get_data(filename, key_to_type: Dict[str, Type] = None) -> Dict[str, Any]:
         return json.load(f, object_hook=lambda dct: _parser(dct, key_to_type))
 
 
+# Data service class
 class DataService:
-    """The Habit service."""
+    """The Data service class."""
 
+    # Declare a class method. Can be called by using data_service.frequencies() (classname.methodname())
     @classmethod
     def frequencies(cls):
         """Load frequencies if they do not exist."""
@@ -47,6 +49,7 @@ class DataService:
                 if len(data) > 0:
                     return frequencies_crud.recreate_frequencies(db=session, frequencies=data)
 
+    # Declare a class method. Can be called by using classname.methodname()
     @classmethod
     def sample_data(cls):
         """Load sample data to demonstrate application functionality."""
@@ -55,6 +58,7 @@ class DataService:
             cls.load_habits(db)
             cls.load_completed_habits(db)
 
+    # Declare a class method. Can be called by using classname.methodname()
     @classmethod
     def load_habits(cls, db):
         """Load sample habits for demo purposes"""
@@ -67,6 +71,7 @@ class DataService:
                 dedupe.append(item)
         habits_crud.create_habits(db, dedupe)
 
+    # Declare a class method. Can be called by using classname.methodname()
     @classmethod
     def load_completed_habits(cls, db):
         """Load sample completed habits for demo purposes"""
@@ -81,6 +86,7 @@ class DataService:
 
         completed_crud.create_list(db, dedupe)
 
+    # Declare a class method. Can be called by using classname.methodname()
     @classmethod
     def clear_database(cls):
         """Clear all Habits and Completed habits from the database."""
@@ -89,5 +95,6 @@ class DataService:
             return habits_crud.delete_all(session)
 
 
+# Create an instance of the DataService
 data_service = DataService()
 
