@@ -16,7 +16,12 @@
   },
   {
     "name": "Family",
-    "description": "Do a fun activity with my family every day",
+    "description": "Do a fun activity with my family every week",
+    "frequency_id": 3
+  },
+  {
+    "name": "Learning",
+    "description": "Spend 1 day a month learning something new",
     "frequency_id": 3
   },
     {
