@@ -56,8 +56,10 @@ def create_habit(db: Session, habit: schemas.HabitCreate):
 
 
 def update_habit(db: Session, habit: schemas.HabitUpdate):
+    """Update an existing habit."""
     query = (select(models.Habit)
              .where(models.Habit.id == habit.id))
+    # Make sure the habit exists
     exist = db.execute(query).scalars().first()
     if exist is None:
         return None
@@ -67,18 +69,10 @@ def update_habit(db: Session, habit: schemas.HabitUpdate):
     db.commit()
     return "Updated"
 
-    # query = (update(models.Habit)
-    #          .where(models.Habit.id == habit.id)
-    #          .values(name=habit.name))
-    # db.execute(query).scalar()
-    # return "Updated"
-
 
 def create_habits(db: Session, habits: list[dict]):
-    # TODO: Check if values exist, and do not re-insert
-    # db.query(models.Habit).delete()
-    # db.commit()
-    # db.add_all(models.Habit, habits)
+    """Create multiple habits."""
+    # Check that the list of habits contains at least 1 item
     if len(habits) <= 0:
         return
     db.bulk_insert_mappings(models.Habit, habits)
