@@ -10,7 +10,7 @@ def is_tracked(habit):
 
 
 def is_equal_period(habit, frequency):
-    """Check if a habit is tracked. This means completed at least once."""
+    """Check if a habit has the same periodicity as the frequency e.g. Daily, Weekly."""
     return habit["repeated"].lower() == frequency.lower()
 
 
