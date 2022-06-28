@@ -1,3 +1,4 @@
+import datetime
 import habits_backend.modules.analysis as analysis
 
 # Test data
@@ -35,3 +36,43 @@ def test_is_equal_period_false():
     frequency = "daily"
     value = analysis.is_equal_period(habit, frequency)
     assert value is False
+
+
+def test_diff_days_one_day_exact():
+    """Test if the difference between two dates is one day."""
+    date1 = datetime.datetime(2022, 4, 29, 14, 17, 45)
+    date2 = datetime.datetime(2022, 4, 30, 14, 17, 45)
+    value = analysis.diff_days(date1, date2)
+    assert value == 1
+
+
+def test_diff_days_one_day_25_hours():
+    """
+    Test if the difference between two dates is one day.
+    Should still return 1. Only the days is taken into consideration for the test.
+    """
+    date1 = datetime.datetime(2022, 4, 29, 14, 17, 45)
+    date2 = datetime.datetime(2022, 4, 30, 15, 17, 45)
+    value = analysis.diff_days(date1, date2)
+    assert value == 1
+
+
+def test_diff_days_two_days():
+    """
+    Test if the difference between two dates is two day.
+    Should still return 2. Only the days is taken into consideration for the test.
+    """
+    date1 = datetime.datetime(2022, 4, 29, 14, 17, 45)
+    date2 = datetime.datetime(2022, 5, 1, 15, 17, 45)
+    value = analysis.diff_days(date1, date2)
+    assert value == 2
+
+
+def test_diff_days_one_day_year():
+    """
+    Test if the difference between two dates is 366 days.
+    """
+    date1 = datetime.datetime(2022, 4, 29, 14, 17, 45)
+    date2 = datetime.datetime(2023, 4, 30, 15, 17, 45)
+    value = analysis.diff_days(date1, date2)
+    assert value == 366
