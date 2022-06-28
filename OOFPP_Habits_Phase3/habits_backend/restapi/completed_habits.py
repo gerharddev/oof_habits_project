@@ -1,10 +1,10 @@
 """Completed Habits endpoints."""
 
 from fastapi import APIRouter
-import habits_backend.schemas.completed_habits as schemas
-from habits_backend.database.connectors import *
-from habits_backend.services.completed_habits import completed_habits_service
 from fastapi.responses import JSONResponse
+
+import habits_backend.schemas.completed_habits as schemas
+from habits_backend.services.completed_habits import completed_habits_service
 
 router = APIRouter(
     prefix="/completed-habits",

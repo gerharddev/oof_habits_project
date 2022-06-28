@@ -1,7 +1,8 @@
 """This file contains the completed habits model declaration used for saving the data."""
+from datetime import datetime
+
 from sqlalchemy import DateTime, Column, ForeignKey, Integer
 from sqlalchemy.orm import relationship
-from datetime import datetime
 
 from habits_backend.database.connectors import Base
 

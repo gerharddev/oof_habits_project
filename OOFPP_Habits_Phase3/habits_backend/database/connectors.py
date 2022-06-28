@@ -4,9 +4,9 @@ Details: https://docs.sqlalchemy.org/en/14/core/connections.html#basic-usage
 """
 
 from sqlalchemy import create_engine
+from sqlalchemy.engine import Engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session, sessionmaker
-from sqlalchemy.engine import Engine
 
 # Set the database connection string
 SQLALCHEMY_DATABASE_URL = "sqlite:///./habits_tracking.db"

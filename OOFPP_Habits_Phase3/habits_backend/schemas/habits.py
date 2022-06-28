@@ -2,6 +2,7 @@
 pydantic schema for habits used for data parsing and validation.
 """
 from pydantic import BaseModel
+
 from .frequencies import Frequency
 
 

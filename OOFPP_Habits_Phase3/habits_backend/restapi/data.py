@@ -1,8 +1,9 @@
 """Frequencies endpoints."""
 
 from fastapi import APIRouter
-from habits_backend.services.data import data_service
 from fastapi.responses import JSONResponse
+
+from habits_backend.services.data import data_service
 
 router = APIRouter(
     prefix="/data",

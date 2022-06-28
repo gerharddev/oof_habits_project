@@ -1,9 +1,11 @@
 """
 pydantic schema for completed habits used for data parsing and validation.
 """
-from pydantic import BaseModel
-from .habits import Habit
 from datetime import datetime
+
+from pydantic import BaseModel
+
+from .habits import Habit
 
 
 class CompletedHabitBase(BaseModel):

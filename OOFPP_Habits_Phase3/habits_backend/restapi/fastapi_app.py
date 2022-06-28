@@ -10,8 +10,9 @@ Information:
 import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
-from . import habits, frequencies, completed_habits, analysis, data
+
 from habits_backend.database.connectors import Base, make_engine
+from . import habits, frequencies, completed_habits, analysis, data
 
 
 def start_api_server():

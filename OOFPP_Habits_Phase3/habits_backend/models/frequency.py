@@ -1,5 +1,6 @@
 """This file contains the model declarations used for saving the data."""
 from sqlalchemy import Column, Integer, String
+
 from habits_backend.database.connectors import Base
 
 

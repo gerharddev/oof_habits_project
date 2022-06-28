@@ -1,5 +1,6 @@
 """Sample unit tests to automate testing."""
 from click.testing import CliRunner
+
 from habits_backend.main import *
 
 runner = CliRunner()

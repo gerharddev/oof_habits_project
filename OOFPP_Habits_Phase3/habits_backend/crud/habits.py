@@ -1,11 +1,12 @@
 """
 CRUD Operations for habits.
 """
-from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import select
-import habits_backend.models.habit as models
+from sqlalchemy.orm import Session, joinedload
+
 import habits_backend.models.completed_habit as completed_models
 import habits_backend.models.frequency as frequency_model
+import habits_backend.models.habit as models
 import habits_backend.schemas.habits as schemas
 
 

@@ -1,9 +1,10 @@
 """Analysis endpoints for REST API."""
 
 from fastapi import APIRouter
+
 from habits_backend.database.connectors import *
 from habits_backend.services.analysis import analysis_service
-import habits_backend.schemas.habits_metadata as schemas
+
 # TODO: Schema responses
 
 router = APIRouter(

@@ -4,7 +4,6 @@ This is used by the analysis module.
 """
 
 from pydantic import BaseModel
-from .frequencies import Frequency
 
 
 class HabitMetadataBase(BaseModel):

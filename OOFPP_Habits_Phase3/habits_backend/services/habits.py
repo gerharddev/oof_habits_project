@@ -2,10 +2,12 @@
 Defines Habits service.
 """
 from typing import List
+
 from fastapi import HTTPException
+
+import habits_backend.crud.habits as crud
 import habits_backend.schemas.habits as schemas
 from habits_backend.database.connectors import *
-import habits_backend.crud.habits as crud
 
 
 # Habits service class

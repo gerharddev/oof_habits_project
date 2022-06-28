@@ -4,11 +4,12 @@ Defines Data service used to load and delete sample data to the database.
 import json
 from datetime import time, date, datetime
 from typing import Dict, Type, Any
-from habits_backend.database.connectors import *
+
+import habits_backend.crud.completed_habits as completed_crud
 import habits_backend.crud.frequencies as frequencies_crud
 import habits_backend.crud.habits as habits_crud
-import habits_backend.crud.completed_habits as completed_crud
 import habits_backend.schemas.completed_habits as schemas
+from habits_backend.database.connectors import *
 
 
 def _parser(dct, types: Dict[str, Type]):

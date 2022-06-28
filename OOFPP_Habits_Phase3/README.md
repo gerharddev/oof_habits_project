@@ -13,7 +13,7 @@ Everybody wants to stop unhealthy habits and create good habits in its place. Th
 ### 2.2 Installing the project
 
 - Open CommandPrompt on Windows or Terminal on Mac after cloning the project from github
-- Go to the root folder of your project where you will see a setup.py file
+- Go to the root folder (**OOFPP-Habits-Phase3**) of your project where you will see a setup.py file
 - Run the following command
 
   ```
@@ -70,15 +70,33 @@ pytest habits_backend/test_main.py
 pytest habits_backend/test_services.py::test_rest_api
 ```
 
+## 4. Testing
 
-## 4. Libraries used
+Test was created using _pytest_. To run the tests follow the following steps
+
+- Open a CommandPrompt or Terminal window
+- Go to the **tests** folder in the root (**OOFPP-Habits-Phase3**) of the application
+- To execute the all the analysis tests, run the following command
+  ```
+  pytest test_modules_analysis.py
+  ```
+
+# TODO: Insert images
+
+- To run individual tests, run the following commands
+  ```
+  pytest test_modules_analysis.py::test_is_tracked_true
+  pytest test_modules_analysis.py::test_is_tracked_false
+  pytest test_modules_analysis.py::test_is_equal_period_true
+  pytest test_modules_analysis.py::test_is_equal_period_false
+  ```
+
+## 5. Libraries used
 
 - pylint
 - pytest: For testing
 - SQLAlcemy: Object relational mapper
 - sqlite3: Database
-
-## Testing
 
 ## Rules
 

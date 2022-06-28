@@ -1,13 +1,13 @@
 """
 CRUD operations for analysis class.
 """
-from sqlalchemy.orm import Session
 from sqlalchemy import select
+from sqlalchemy.orm import Session
 from sqlalchemy.sql.expression import func
 
-import habits_backend.models.habit as habit_models
 import habits_backend.models.completed_habit as completed_models
 import habits_backend.models.frequency as frequency_models
+import habits_backend.models.habit as habit_models
 
 
 def add_tracking_count(db, habit):

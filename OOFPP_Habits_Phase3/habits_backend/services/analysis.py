@@ -2,14 +2,15 @@
 Defines Completed Habits service.
 """
 from typing import List
+
 from fastapi.responses import JSONResponse
-import habits_backend.schemas.habits_metadata as schemas
-from habits_backend.database.connectors import *
+
 import habits_backend.crud.analysis as crud
 import habits_backend.modules.analysis as analyse
+from habits_backend.crud.habits import get_habits_ids
+from habits_backend.database.connectors import *
 from habits_backend.services.completed_habits import completed_habits_service as completed_service
 from habits_backend.services.habits import habits_service
-from habits_backend.crud.habits import get_habits_ids
 
 
 def get_steak_by_id(habit_id):

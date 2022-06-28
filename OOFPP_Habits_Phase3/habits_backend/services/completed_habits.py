@@ -2,9 +2,10 @@
 Defines Completed Habits service.
 """
 from typing import List
+
+import habits_backend.crud.completed_habits as crud
 import habits_backend.schemas.completed_habits as schemas
 from habits_backend.database.connectors import *
-import habits_backend.crud.completed_habits as crud
 
 
 # Completed habits service class

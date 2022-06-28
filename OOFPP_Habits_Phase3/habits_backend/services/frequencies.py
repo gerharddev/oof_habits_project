@@ -6,11 +6,12 @@ Information:
     https://pydantic-docs.helpmanual.io/
 """
 from typing import List
+
 from fastapi import HTTPException
 
+import habits_backend.crud.frequencies as crud
 import habits_backend.schemas.frequencies as schemas
 from habits_backend.database.connectors import *
-import habits_backend.crud.frequencies as crud
 
 
 # Frequencies service class
