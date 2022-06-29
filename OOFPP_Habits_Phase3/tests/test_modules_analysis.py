@@ -201,5 +201,20 @@ def test_get_equal_periodicity():
     value = analysis.get_equal_periodicity(habits, 'daily')
     assert len(value) == 2
 
-    # get_tracked_habits
-    # get_streak_by_habit_id
+
+def test_get_streak_by_habit_id():
+    """Test that we get a streak by habit_id and frequency."""
+    from habits_backend.schemas.completed_habits import CompletedHabitQuery
+
+    completed = [CompletedHabitQuery(id=1, completed_date=datetime.datetime(2022, 4, 27, 14, 17, 45), habit_id=1),
+                 CompletedHabitQuery(id=2, completed_date=datetime.datetime(2022, 4, 28, 15, 57, 21), habit_id=1),
+                 CompletedHabitQuery(id=3, completed_date=datetime.datetime(2022, 4, 29, 14, 17, 45), habit_id=1),
+                 CompletedHabitQuery(id=4, completed_date=datetime.datetime(2022, 4, 30, 15, 57, 21), habit_id=1),
+                 CompletedHabitQuery(id=5, completed_date=datetime.datetime(2022, 5, 1, 14, 17, 45), habit_id=1),
+                 CompletedHabitQuery(id=6, completed_date=datetime.datetime(2022, 5, 2, 15, 57, 21), habit_id=1),
+                 CompletedHabitQuery(id=7, completed_date=datetime.datetime(2022, 5, 4, 15, 57, 21), habit_id=1),
+                 CompletedHabitQuery(id=8, completed_date=datetime.datetime(2022, 5, 5, 15, 57, 21), habit_id=1),
+                 CompletedHabitQuery(id=9, completed_date=datetime.datetime(2022, 5, 6, 15, 57, 21), habit_id=1)]
+    value = analysis.get_streak_by_habit_id(completed, 'day')
+    # Should find a streak of 6 days
+    assert value['cnt'] == 6

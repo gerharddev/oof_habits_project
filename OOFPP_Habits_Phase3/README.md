@@ -59,6 +59,8 @@ python main.py start-rest-api
 To see the OpenAPI documentation browse to
 http://127.0.0.1:8000/docs
 
+![Swagger Documentation](./resources/swagger.png)
+
 ### 3.3 Running the tests
 
 We are using pytest as our testing framework.
@@ -77,11 +79,18 @@ Test was created using _pytest_. To run the tests follow the following steps
 - Open a CommandPrompt or Terminal window
 - Go to the **tests** folder in the root (**OOFPP-Habits-Phase3**) of the application
 - To execute the all the analysis tests, run the following command
+
   ```
   pytest test_modules_analysis.py
   ```
 
-# TODO: Insert images
+  ![Passing Tests](./resources/test_passing.png)
+
+- To execute the all the cli tests, run the following command
+
+  ```
+  pytest test_main.py
+  ```
 
 - To run individual tests, run the following commands
   ```
@@ -90,13 +99,6 @@ Test was created using _pytest_. To run the tests follow the following steps
   pytest test_modules_analysis.py::test_is_equal_period_true
   pytest test_modules_analysis.py::test_is_equal_period_false
   ```
-
-## 5. Libraries used
-
-- pylint
-- pytest: For testing
-- SQLAlcemy: Object relational mapper
-- sqlite3: Database
 
 ## 6. Calculation rules for a Streak
 
@@ -112,3 +114,10 @@ Test was created using _pytest_. To run the tests follow the following steps
   - Less than or equal to a month is treated as a month
   - Days, hours, minutes and seconds are ignored.
   - If the year count is more than 1, we know the streak was broken
+
+## 5. Libraries used
+
+- pylint
+- pytest: For testing
+- SQLAlcemy: Object relational mapper
+- sqlite3: Database
