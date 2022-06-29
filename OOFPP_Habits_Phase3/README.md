@@ -20,24 +20,24 @@ Everybody wants to stop unhealthy habits and create good habits in its place. Th
   pip install .
   ```
 
-- If you see `Successfully installed OOFPP-Habits-Phase3-1.0` the application is ready to be run.
+- If you see `Successfully installed OOFPP-Habits-Phase3-1.0` the application is ready to be used.
 
 ## 3. Using the project
 
 ### 3.1 Running the cli
 
-From the CommandPrompt or Terminal window and go to the _habits_backend_ folder (**OOFPP-Habits-Phase3**) of the application.
-Run the following command to see the help menu.
+From the _CommandPrompt_ or _Terminal_ window, go to the _habits_backend_ folder (**OOFPP-Habits-Phase3**) of the application.
+Run the following command to see the cli help menu.
 
 ```
 python main.py --help
 ```
 
-If you see the following output you can load testing data
+You should see the following help menu
 
 ![Cli Menu](./resources/cli_help_menu.png)
 
-**To clear or to load test data, you can run the following commands**
+**To load or clear the test data, you can run the following commands**
 
 ```
 data-clear
@@ -46,23 +46,34 @@ data-seed
 
 **Analysis cli commands**
 
+_Show all the tracked habits_ (Habit that was completed at least once)
+
 ```
 python main.py analyse-tracked-habits
 ```
+
+_Habits with the same periodicity_ ('daily','weekly','monthly')
 
 ```
 python analyse-equal-periodicity --frequency daily
 ```
 
+_Longest streak for a habit_
+
 ```
 python main.py analyse-streak-habit --habit_id 1
 ```
+
+_Longest streak for any habit_
 
 ```
 python main.py analyse-longest-streak
 ```
 
 ### 3.2 Start Rest API (Swagger UI)
+
+From the _CommandPrompt_ or _Terminal_ window, go to the _habits_backend_ folder (**OOFPP-Habits-Phase3**) of the application.
+Run the following command to run the REST API.
 
 ```
 python main.py start-rest-api
@@ -73,24 +84,13 @@ http://127.0.0.1:8000/docs
 
 ![Swagger Documentation](./resources/swagger.png)
 
-You can use the _seed_ and _clear_ operations under data to load/clear testing data
+You can use the _seed_ and _clear_ methods under data to load/clear testing data
 
 ![Test Data](./resources/test_data.png)
 
-### 3.3 Running the tests
-
-We are using pytest as our testing framework.
-To run the test open your terminal in the tests folder and run
-
-```
-pytest habits_backend/test_main.py
-
-pytest habits_backend/test_services.py::test_rest_api
-```
-
 ## 4. Testing
 
-Test was created using _pytest_. To run the tests follow the following steps
+Tests was created using _pytest_. To run the tests, follow the following steps
 
 - Open a CommandPrompt or Terminal window
 - Go to the **tests** folder in the root (**OOFPP-Habits-Phase3**) of the application
@@ -131,9 +131,3 @@ Test was created using _pytest_. To run the tests follow the following steps
   - Days, hours, minutes and seconds are ignored.
   - If the year count is more than 1, we know the streak was broken
 
-## 5. Libraries used
-
-- pylint
-- pytest: For testing
-- SQLAlcemy: Object relational mapper
-- sqlite3: Database

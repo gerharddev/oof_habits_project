@@ -1,6 +1,6 @@
 # Object Oriented and Functional Programming - Habit tracking application
 
-This is the project work folder for Object Oriented and Functional Programming with Python
+This is the project work folder for Object Oriented and Functional Programming with Python project
 
 ## Folder structure
 
