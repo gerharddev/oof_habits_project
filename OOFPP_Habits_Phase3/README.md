@@ -13,22 +13,38 @@ Everybody wants to stop unhealthy habits and create good habits in its place. Th
 ### 2.2 Installing the project
 
 - Open CommandPrompt on Windows or Terminal on Mac after cloning the project from github
-- Go to the root folder (**OOFPP-Habits-Phase3**) of your project where you will see a setup.py file
+- Go to the root folder (**OOFPP-Habits-Phase3**) of the project where you will see a setup.py file
 - Run the following command
 
   ```
   pip install .
   ```
 
-- If you see `Successfully installed OOFPP-Habits-Phase3-1.0` the project is ready to be run.
+- If you see `Successfully installed OOFPP-Habits-Phase3-1.0` the application is ready to be run.
 
 ## 3. Using the project
 
 ### 3.1 Running the cli
 
+From the CommandPrompt or Terminal window and go to the _habits_backend_ folder (**OOFPP-Habits-Phase3**) of the application.
+Run the following command to see the help menu.
+
 ```
 python main.py --help
 ```
+
+If you see the following output you can load testing data
+
+![Cli Menu](./resources/cli_help_menu.png)
+
+**To clear or to load test data, you can run the following commands**
+
+```
+data-clear
+data-seed
+```
+
+**Analysis cli commands**
 
 ```
 python main.py analyse-tracked-habits
@@ -46,10 +62,6 @@ python main.py analyse-streak-habit --habit_id 1
 python main.py analyse-longest-streak
 ```
 
-python main.py start-rest-api
-python main.py habit-cli --add Test
-python main.py habit-cli --command Test
-
 ### 3.2 Start Rest API (Swagger UI)
 
 ```
@@ -60,6 +72,10 @@ To see the OpenAPI documentation browse to
 http://127.0.0.1:8000/docs
 
 ![Swagger Documentation](./resources/swagger.png)
+
+You can use the _seed_ and _clear_ operations under data to load/clear testing data
+
+![Test Data](./resources/test_data.png)
 
 ### 3.3 Running the tests
 
