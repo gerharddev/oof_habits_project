@@ -143,3 +143,63 @@ def test_diff_months_greater_than_one_month():
     date2 = datetime.datetime(2022, 7, 9, 15, 17, 45)
     value = analysis.diff_months(date1, date2)
     assert value == 2
+
+
+# Streak Tests
+def test_is_streak_day_true():
+    """Test if is_streak returns True for two consecutive days."""
+    date1 = datetime.datetime(2022, 5, 1, 14, 17, 45)
+    date2 = datetime.datetime(2022, 5, 2, 15, 17, 45)
+    value = analysis.is_streak(date1, date2, 'day')
+    assert value is True
+
+
+def test_is_streak_day_false():
+    """Test if is_streak returns False for two non-consecutive days."""
+    date1 = datetime.datetime(2022, 5, 1, 14, 17, 45)
+    date2 = datetime.datetime(2022, 5, 3, 15, 17, 45)
+    value = analysis.is_streak(date1, date2, 'day')
+    assert value is False
+
+
+def test_is_streak_week_true():
+    """Test if is_streak returns True for two consecutive weeks."""
+    date1 = datetime.datetime(2022, 5, 1, 14, 17, 45)
+    date2 = datetime.datetime(2022, 5, 8, 15, 17, 45)
+    value = analysis.is_streak(date1, date2, 'week')
+    assert value is True
+
+
+def test_is_streak_week_false():
+    """Test if is_streak returns False for two non-consecutive weeks."""
+    date1 = datetime.datetime(2022, 5, 1, 14, 17, 45)
+    date2 = datetime.datetime(2022, 5, 14, 15, 17, 45)
+    value = analysis.is_streak(date1, date2, 'week')
+    assert value is False
+
+
+def test_is_streak_month_true():
+    """Test if is_streak returns True for two consecutive months."""
+    date1 = datetime.datetime(2022, 5, 1, 14, 17, 45)
+    date2 = datetime.datetime(2022, 6, 2, 15, 17, 45)
+    value = analysis.is_streak(date1, date2, 'month')
+    assert value is True
+
+
+def test_is_streak_month_false():
+    """Test if is_streak returns False for two non-consecutive months."""
+    date1 = datetime.datetime(2022, 5, 1, 14, 17, 45)
+    date2 = datetime.datetime(2022, 7, 3, 15, 17, 45)
+    value = analysis.is_streak(date1, date2, 'month')
+    assert value is False
+
+
+# Function Tests
+def test_get_equal_periodicity():
+    """Test that we find habits with the same periodicity."""
+    habits = [{'id': 1, 'name': 'Running', 'repeated': 'Daily', 'count': 9}, {'id': 2, 'name': 'Meditation', 'repeated': 'Daily', 'count': 8}, {'id': 3, 'name': 'PersonalTime', 'repeated': 'Weekly', 'count': 4}]
+    value = analysis.get_equal_periodicity(habits, 'daily')
+    assert len(value) == 2
+
+    # get_tracked_habits
+    # get_streak_by_habit_id

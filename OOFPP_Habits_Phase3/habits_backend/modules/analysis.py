@@ -32,13 +32,15 @@ def diff_weeks(d1, d2):
 
 def diff_months(d1, d2):
     """Calculate the number of months between two dates."""
+    # Get the number of year and times it by 12 to get the months.
+    # Then add the months to the results to get the total number of months
     months = (d2.year - d1.year) * 12 + d2.month - d1.month
     return months
 
 
 def is_streak(d1, d2, frequency):
     """Check if to items are still a valid streak. Check depending on the frequency rules."""
-
+    # If it is more than 1, we know the streak was broken
     if str.lower(frequency) == 'day':
         return True if diff_days(d1, d2) <= 1 else False
     elif str.lower(frequency) == 'week':
@@ -50,7 +52,8 @@ def is_streak(d1, d2, frequency):
 def custom_filter(function, iterable, frequency):
     """Custom filter function to filter habits with the same frequency."""
     from functools import reduce
-
+    # reduce - apply a function to each item in a list
+    # lambda - small function with only one expression
     return reduce(
         lambda items, value: items + [value] if function(value, frequency) else items,
         iterable,

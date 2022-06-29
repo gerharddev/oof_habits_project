@@ -98,14 +98,17 @@ Test was created using _pytest_. To run the tests follow the following steps
 - SQLAlcemy: Object relational mapper
 - sqlite3: Database
 
-## 6. Calculation rules
+## 6. Calculation rules for a Streak
 
 - Day:
   - Less than or equal to 1 day is counted as a day.
   - Hours, minutes and seconds are ignored.
+  - If the day count is more than 1, we know the streak was broken
 - Week:
   - Less than or equal to 7 days is treated as a week.
   - Hours, minutes and seconds are ignored.
+  - If the week count is more than 1, we know the streak was broken
 - Month
   - Less than or equal to a month is treated as a month
   - Days, hours, minutes and seconds are ignored.
+  - If the year count is more than 1, we know the streak was broken
