@@ -77,7 +77,6 @@ class AnalysisService:
     @classmethod
     def get_streak_by_habit_id(cls, habit_id) -> dict:
         """Returns the longest steak for a habit by habit id."""
-        # TODO - Should I call crud or service
         streak = get_steak_by_id(habit_id)
         if streak is not None:
             return streak
@@ -88,7 +87,6 @@ class AnalysisService:
     @classmethod
     def get_longest_streak(cls) -> dict:
         """Return the longest running streak and for which habit."""
-        # TODO - Should I call crud or service
         # Get a list of all the habit ids
         with get_db() as session:
             ids = get_habits_ids(session)
