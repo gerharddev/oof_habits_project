@@ -2,7 +2,7 @@
 
 ## 1. Overview
 
-Everybody wants to stop unhealthy habits and create good habits in its place. They are turning to technology for assistance to achieving this. I was tasked to create a backend for a habit tracking application that will assist users to achieve their goals.
+Everybody wants to stop unhealthy habits and create good habits in its place. They are turning to technology for assistance to achieve this. I was tasked to create a backend for a habit tracking application that will assist users to reach their goals.
 
 ## 2. Running the project
 
@@ -12,8 +12,9 @@ Everybody wants to stop unhealthy habits and create good habits in its place. Th
 
 ### 2.2 Installing the project
 
-- Open CommandPrompt on Windows or Terminal on Mac after cloning the project from github
-- Go to the root folder (**OOFPP-Habits-Phase3**) of the project where you will see a setup.py file
+- Clone the repository locally
+- Open CommandPrompt on Windows or Terminal on Mac to the cloned folder
+- Go to the root folder (**OOFPP-Habits-Phase3**) of the project where you will see a _setup.py_ file
 - Run the following command
 
   ```
@@ -24,10 +25,10 @@ Everybody wants to stop unhealthy habits and create good habits in its place. Th
 
 ## 3. Using the project
 
-### 3.1 Running the cli
+### 3.1 Running the _cli_
 
 From the _CommandPrompt_ or _Terminal_ window, go to the _habits_backend_ folder (**OOFPP-Habits-Phase3**) of the application.
-Run the following command to see the cli help menu.
+Run the following command to see the _cli_ help menu.
 
 ```
 python main.py --help
@@ -40,8 +41,8 @@ You should see the following help menu
 **To load or clear the test data, you can run the following commands**
 
 ```
-data-clear
-data-seed
+python main.py data-clear
+python main.py data-seed
 ```
 
 **Analysis cli commands**
