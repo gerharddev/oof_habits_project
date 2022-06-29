@@ -98,7 +98,14 @@ Test was created using _pytest_. To run the tests follow the following steps
 - SQLAlcemy: Object relational mapper
 - sqlite3: Database
 
-## Rules
+## 6. Calculation rules
 
-- dayly - 24 hours
-- Montly
+- Day:
+  - Less than or equal to 1 day is counted as a day.
+  - Hours, minutes and seconds are ignored.
+- Week:
+  - Less than or equal to 7 days is treated as a week.
+  - Hours, minutes and seconds are ignored.
+- Month
+  - Less than or equal to a month is treated as a month
+  - Days, hours, minutes and seconds are ignored.

@@ -2,6 +2,7 @@
 This module contains the Habit analysis.
 We used functional programming concepts in this module.
 """
+import math
 
 
 def is_tracked(habit):
@@ -22,7 +23,11 @@ def diff_days(d1, d2):
 def diff_weeks(d1, d2):
     """Calculate the number of weeks between two dates."""
     days = (d2-d1).days
-    return days//7
+    if days <= 7:
+        return 0
+    # Devide by 7 with reminder value. Round upwards if there is a remainder value to calculate if it
+    # is more than a week
+    return math.ceil(days/7)
 
 
 def diff_months(d1, d2):
