@@ -46,7 +46,7 @@ data-seed
 
 **Analysis cli commands**
 
-_Show all the tracked habits_ (Habit that was completed at least once)
+_Show all the tracked habits_ (Habit that was completed at least once. The testing data has habits that was not completed.)
 
 ```
 python main.py analyse-tracked-habits
@@ -130,4 +130,3 @@ Tests was created using _pytest_. To run the tests, follow the following steps
   - Less than or equal to a month is treated as a month
   - Days, hours, minutes and seconds are ignored.
   - If the year count is more than 1, we know the streak was broken
-
