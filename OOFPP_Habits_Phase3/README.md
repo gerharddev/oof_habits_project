@@ -86,6 +86,15 @@ http://127.0.0.1:8000/docs or http://localhost:8000/docs
 
 ![Swagger Documentation](./resources/swagger.png)
 
+**Using the Swagger interface**
+
+- Click on the color coded method (e.g. GET /habits/{id} to open up the interface)
+- Click on the _Try it out_ button
+- If there are details required, fill it in e.g. habit_id
+- Click on the blue _Execute_ button
+
+![Using Swagger](./resources/use_swagger.png)
+
 You can use the _seed_ and _clear_ methods under data section to load/clear testing data
 
 ![Test Data](./resources/test_data.png)
