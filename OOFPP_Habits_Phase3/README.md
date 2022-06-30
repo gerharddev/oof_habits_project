@@ -1,14 +1,46 @@
 # Habit Tracking Application
 
-## 1. Overview
+## Table of contents
+
+[1. Overview](#overview)
+
+[2. Running the project](#running-the-project)
+
+&nbsp;&nbsp;&nbsp;&nbsp;[2.1 Prerequisites](#prerequisites)
+
+&nbsp;&nbsp;&nbsp;&nbsp;[2.2 Installing the project](#installation)
+
+[3. Using the project](#using)
+
+&nbsp;&nbsp;&nbsp;&nbsp;[3.1 Running the cli](#running-cli)
+
+&nbsp;&nbsp;&nbsp;&nbsp;[3.2 Start Rest API (Swagger UI)](#restapi)
+
+[4. Testing](#testing)
+
+[5. Calculation rules for a Streak](#rules)
+
+[6. Technology choices](#technology)
+
+[7. Bibliography](#bibliography)
+
+<div id='overview'/>
+
+## 1. Overview <a name="overview"></a>
 
 Everybody wants to stop unhealthy habits and create good habits in its place. They are turning to technology for assistance to achieve this. I was tasked to create a backend for a habit tracking application that will assist users to reach their goals.
 
+<div id='running-the-project'/>
+
 ## 2. Running the project
+
+<div id='prerequisites'/>
 
 ### 2.1 Prerequisites
 
 **Python 3.7** or later. (Python 3.10.3 was used for development). Download the latest version [here](https://www.python.org/downloads/)
+
+<div id='installation'/>
 
 ### 2.2 Installing the project
 
@@ -23,7 +55,11 @@ Everybody wants to stop unhealthy habits and create good habits in its place. Th
 
 - If you see `Successfully installed OOFPP-Habits-Phase3-1.0` the application is ready to be used.
 
+<div id='using'/>
+
 ## 3. Using the project
+
+<div id='running-cli'/>
 
 ### 3.1 Running the _cli_
 
@@ -71,6 +107,8 @@ _Longest streak for any habit_
 python main.py analyse-longest-streak
 ```
 
+<div id='restapi' />
+
 ### 3.2 Start Rest API (Swagger UI)
 
 From the _CommandPrompt_ or _Terminal_ window, go to the _habits_backend_ folder (**OOFPP-Habits-Phase3**) of the application.
@@ -98,6 +136,8 @@ http://127.0.0.1:8000/docs or http://localhost:8000/docs
 You can use the _seed_ and _clear_ methods under data section to load/clear testing data
 
 ![Test Data](./resources/test_data.png)
+
+<div id='testing' />
 
 ## 4. Testing
 
@@ -129,7 +169,9 @@ To run the tests, follow the following steps
   pytest test_modules_analysis.py::test_is_equal_period_false
   ```
 
-## 6. Calculation rules for a Streak
+<div id='rules' />
+
+## 5. Calculation rules for a Streak
 
 - Day:
   - Less than or equal to 1 day is counted as a day. (e.g. "2022-04-27T14:17:45" to "2022-04-28T15:57:21" is one day)
@@ -144,7 +186,9 @@ To run the tests, follow the following steps
   - Days, hours, minutes and seconds are ignored.
   - If the year count is more than 1, the streak was broken
 
-## 7. Technology choices
+<div id='technology' />
+
+## 6. Technology choices
 
 - Python version 3.10.3 _(Project requirement to use 3.7 or later.)_
 - PyCharm 2022.1.1 _(Popular IDE / source-code editor that runs on Windows, Linux and macOS. I found that it works better than Visual Studio Code for python development.)_
@@ -157,7 +201,9 @@ To run the tests, follow the following steps
 - SQLAlchemy _(Accessing data stored in the database.)_
 - pydantic _(Data parsing and validation.)_
 
-## 8. Bibliography
+<div id='bibliography' />
+
+## 7. Bibliography
 
 1. n.a. (n.d). Google Python Style Guide – Naming https://google.github.io/styleguide/pyguide.html#316-naming
 2. Lutz, M (2013). OOP: The Big Picture, Learning Python 5th Edition. O’Reilly
