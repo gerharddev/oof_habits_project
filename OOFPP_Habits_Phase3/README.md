@@ -153,7 +153,13 @@ To run the tests, follow the following steps
   pytest test_modules_analysis.py
   ```
 
-  ![Passing Tests](./resources/test_passing.png)
+  **View running tests from Command Prompt**
+
+  ![Test Command View](./resources/test_cmd_view.png)
+
+  **View running tests in the IDE**
+
+  ![Tests IDE View](./resources/test_passing.png)
 
 - To execute all the _cli_ tests, run the following command
 
